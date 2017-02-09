@@ -253,11 +253,11 @@ public class Game {
 	/**
 	 * Moves a piece on the game board.
 	 * 
-	 * @param boardArray	
-	 * @param startRank		
-	 * @param startFile		
-	 * @param destRank		
-	 * @param destFile		
+	 * @param boardArray    Array of Pieces on the Board.
+	 * @param startRank     Starting Rank (Piece to be moved).
+	 * @param startFile     Starting File (Piece to be moved).
+	 * @param destRank      Destination Rank.
+	 * @param destFile      Destination File.   
 	 */
 	public void movePiece(Piece[][] boardArray, int startRank,  int startFile, int destRank, int destFile) {
 		boardArray[destRank][destFile] = null;
