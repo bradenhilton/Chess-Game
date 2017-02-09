@@ -271,12 +271,12 @@ public class Game {
 	 * <p>
 	 * Tries to match the chosen move with all possible moves for the selected piece.
 	 * 
-	 * @param boardArray	Array of Pieces on the Board.
-	 * @param startRank		Starting Rank (Piece to be moved).
-	 * @param startFile		Starting File (Piece to be moved).
-	 * @param destRank		Destination Rank.
-	 * @param destFile		Destination File.
-	 * @return				True for legal move, False for illegal move.
+	 * @param boardArray    Array of Pieces on the Board.
+	 * @param startRank     Starting Rank (Piece to be moved).
+	 * @param startFile     Starting File (Piece to be moved).
+	 * @param destRank      Destination Rank.
+	 * @param destFile      Destination File.
+	 * @return              True for legal move, False for illegal move.
 	 */
 	public boolean isLegalMove(Piece[][] boardArray, int startRank, int startFile, int destRank, int destFile) {
 		String destination = String.valueOf(destRank) + String.valueOf(destFile);
