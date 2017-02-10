@@ -1,7 +1,8 @@
 package pieces;
 
-import java.util.*;
-import game.*;
+import java.util.Collection;
+
+import game.Player;
 
 /**
  * @author Braden Hilton - 14017272

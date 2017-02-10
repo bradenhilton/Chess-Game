@@ -1,8 +1,15 @@
 package pieces;
 
-import java.util.*;
-import game.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import game.Player;
+
+/**
+ * @author Braden Hilton - 14017272
+ * @version 1.0
+ */
 public class Pawn extends Piece {
 	protected PieceType m_type;
 	
@@ -25,33 +32,33 @@ public class Pawn extends Piece {
 		List<String> possibleMoves = new ArrayList<String>();
 		
 		if (m_player == Player.BLACK) {			
-				if (boardArray[startRank+1][startFile] == null) {
-					possibleMoves.add(String.valueOf(startRank+1) + String.valueOf(startFile));		// move by one
+			if (boardArray[startRank+1][startFile] == null) {
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank+1) + String.valueOf(startFile));		// move by one
+			}
+			if ((startFile+1) <= 7 && boardArray[startRank+1][startFile+1] != null && boardArray[startRank+1][startFile+1].m_player != Player.BLACK) {
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank+1) + String.valueOf(startFile+1));	// capture diagonally left
+			}
+			if ((startFile-1) >= 0 && boardArray[startRank+1][startFile-1] != null && boardArray[startRank+1][startFile-1].m_player != Player.BLACK) {
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank+1) + String.valueOf(startFile-1));	// capture diagonally right
+			}
+			if (!hasMoved) {
+				if (boardArray[startRank+2][startFile] == null) {
+					possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank+2) + String.valueOf(startFile));	// move by two
 				}
-				if ((startFile+1) <= 7 && boardArray[startRank+1][startFile+1] != null && boardArray[startRank+1][startFile+1].m_player != Player.BLACK) {
-					possibleMoves.add(String.valueOf(startRank+1) + String.valueOf(startFile+1));	// capture diagonally left
-				}
-				if ((startFile-1) >= 0 && boardArray[startRank+1][startFile-1] != null && boardArray[startRank+1][startFile-1].m_player != Player.BLACK) {
-					possibleMoves.add(String.valueOf(startRank+1) + String.valueOf(startFile-1));	// capture diagonally right
-				}
-				if (!hasMoved) {
-					if (boardArray[startRank+2][startFile] == null) {
-						possibleMoves.add(String.valueOf(startRank+2) + String.valueOf(startFile));	// move by two
-					}
-				}
+			}
 		} else if (m_player == Player.WHITE) {
 			if (boardArray[startRank-1][startFile] == null) {
-				possibleMoves.add(String.valueOf(startRank-1) + String.valueOf(startFile));		// move by one
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank-1) + String.valueOf(startFile));		// move by one
 			}
 			if ((startFile+1) <= 7 && boardArray[startRank-1][startFile+1] != null && boardArray[startRank-1][startFile+1].m_player != Player.WHITE) {
-				possibleMoves.add(String.valueOf(startRank-1) + String.valueOf(startFile+1));	// capture diagonally right
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank-1) + String.valueOf(startFile+1));	// capture diagonally right
 			}
 			if ((startFile-1) >= 0 && boardArray[startRank-1][startFile-1] != null && boardArray[startRank-1][startFile-1].m_player != Player.WHITE) {
-				possibleMoves.add(String.valueOf(startRank-1) + String.valueOf(startFile-1));	// capture diagonally left
+				possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank-1) + String.valueOf(startFile-1));	// capture diagonally left
 			}
 			if (!hasMoved) {
 				if (boardArray[startRank-2][startFile] == null) {
-					possibleMoves.add(String.valueOf(startRank-2) + String.valueOf(startFile));	// move by two
+					possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank-2) + String.valueOf(startFile));	// move by two
 				}
 			}
 		}

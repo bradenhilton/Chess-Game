@@ -1,7 +1,10 @@
 package pieces;
 
-import java.util.*;
-import game.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import game.Player;
 
 public class Rook extends Piece {
 	protected PieceType m_type;
@@ -22,7 +25,14 @@ public class Rook extends Piece {
 
 	@Override
 	public Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
-		Collection<String> possibleMoves = new ArrayList<String>();
+		List<String> possibleMoves = new ArrayList<String>();
+		
+		if (m_player == Player.BLACK) {
+			
+		} else if (m_player == Player.WHITE) {
+			
+		}
+		
 		return possibleMoves;
 	}
 }

@@ -279,8 +279,8 @@ public class Game {
 	 * @return              True for legal move, False for illegal move.
 	 */
 	public boolean isLegalMove(Piece[][] boardArray, int startRank, int startFile, int destRank, int destFile) {
-		String destination = String.valueOf(destRank) + String.valueOf(destFile);
-		if (!boardArray[startRank][startFile].generatePossibleMoves(boardArray, startRank, startFile).contains(destination)) {
+		String move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank) + String.valueOf(destFile);
+		if (!boardArray[startRank][startFile].generatePossibleMoves(boardArray, startRank, startFile).contains(move)) {
 			return false;
 		}
 		return true;

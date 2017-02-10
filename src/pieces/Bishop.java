@@ -1,8 +1,15 @@
 package pieces;
 
-import java.util.*;
-import game.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import game.Player;
+
+/**
+ * @author Braden Hilton - 14017272
+ * @version 1.0
+ */
 public class Bishop extends Piece {
 	protected PieceType m_type;
 	
@@ -26,7 +33,14 @@ public class Bishop extends Piece {
 		//int deltaFile = Math.abs(destFile - startFile);
 		
 		//return deltaRank == deltaFile;
-		Collection<String> possibleMoves = new ArrayList<String>();
+		List<String> possibleMoves = new ArrayList<String>();
+		
+		if (m_player == Player.BLACK) {
+			
+		} else if (m_player == Player.WHITE) {
+			
+		}
+		
 		return possibleMoves;
 	}
 }
