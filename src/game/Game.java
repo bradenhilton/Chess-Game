@@ -16,6 +16,7 @@ public class Game {
 	private boolean whiteTurn = true;
 	private boolean gameOver = false;
 	private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
+	private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
 	private List<String> moveHistory = new ArrayList<String>();
 	
 	/**
@@ -23,7 +24,7 @@ public class Game {
 	 * <p>
 	 * Adds characters to the character map, then starts the appropriate game loop depending on number of players.
 	 * 
-	 * @param numPlayers	Number of players.
+	 * @param numPlayers	    Number of players.
 	 */
 	public void start(int numPlayers) {
 		charMap.put('a', 0);
@@ -34,6 +35,15 @@ public class Game {
 		charMap.put('f', 5);
 		charMap.put('g', 6);
 		charMap.put('h', 7);
+		
+		reverseCharMap.put(0, 'a');
+		reverseCharMap.put(1, 'b');
+		reverseCharMap.put(2, 'c');
+		reverseCharMap.put(3, 'd');
+		reverseCharMap.put(4, 'e');
+		reverseCharMap.put(5, 'f');
+		reverseCharMap.put(6, 'g');
+		reverseCharMap.put(7, 'h');
 		
 		if (numPlayers == 1) {
 			singleplayerLoop(whiteTurn);
@@ -49,7 +59,7 @@ public class Game {
 	 * <p>
 	 * Does not allow user input for Black turn due to AI.
 	 * 
-	 * @param whiteTurn		Boolean which dictates whose turn it is.
+	 * @param whiteTurn		    Boolean which dictates whose turn it is.
 	 */
 	private void singleplayerLoop(boolean whiteTurn) {
 		while (!gameOver) {
@@ -64,7 +74,13 @@ public class Game {
 				
 				System.out.println("White to move (e.g. d2d4)");
 				move = input.nextLine();
-				parseMoveSingleplayer(move, whiteTurn);
+				
+				if (move.contains("list")) {
+					String piece = input.nextLine();
+					listPossibleMoves(piece);
+				} else {
+					parseMoveMultiplayer(move, whiteTurn);
+				}
 			} else {
 				// TODO Minimax/Alpha-Beta Pruning
 				
@@ -96,8 +112,8 @@ public class Game {
 	 * <p>
 	 * Converts move e.g. d2d4 into start ranks and files and new ranks and files.
 	 * 
-	 * @param move			String representation of move input.
-	 * @param whiteTurn		Boolean which dictates whose turn it is. 
+	 * @param move			    String representation of move input.
+	 * @param whiteTurn		    Boolean which dictates whose turn it is. 
 	 */
 	public void parseMoveSingleplayer(String move, boolean whiteTurn) {
 		int startRank, startFile, newRank, newFile;
@@ -105,11 +121,11 @@ public class Game {
 		if (move.length() != 4 && !move.matches("[a-hA-H][1-8][a-hA-H][1-8]")) {
 			System.err.println("Error: Invalid move");
 		} else {
-			startFile = charMap.get(move.toLowerCase().charAt(0));
 			startRank = 8 - Integer.parseInt(move.substring(1,2));
+			startFile = charMap.get(move.toLowerCase().charAt(0));
 			
-			newFile = charMap.get(move.toLowerCase().charAt(2));
 			newRank = 8 - Integer.parseInt(move.substring(3,4));
+			newFile = charMap.get(move.toLowerCase().charAt(2));
 			
 			if (chessBoard.boardArray[startRank][startFile] == null) {
 				System.err.println("Error: Invalid move, no piece found at " + move.substring(0, 2));
@@ -153,7 +169,7 @@ public class Game {
 	 * <p>
 	 * Allows user input for moves from both players.
 	 * 
-	 * @param whiteTurn		Boolean which dictates whose turn it is.
+	 * @param whiteTurn		    Boolean which dictates whose turn it is.
 	 */
 	private void multiplayerLoop(boolean whiteTurn) {
 		while (!gameOver) {
@@ -168,7 +184,13 @@ public class Game {
 				
 				System.out.println("White to move (e.g. d2d4)");
 				move = input.nextLine();
-				parseMoveMultiplayer(move, whiteTurn);
+				
+				if (move.contains("list")) {
+					String piece = input.nextLine();
+					listPossibleMoves(piece);
+				} else {
+					parseMoveMultiplayer(move, whiteTurn);
+				}
 			} else {
 				if (!moveHistory.isEmpty()) {
 					System.out.println(moveHistory.get(moveHistory.size() - 1));
@@ -176,7 +198,13 @@ public class Game {
 				
 				System.out.println("Black to move (e.g. g7g6)");
 				move = input.nextLine();
-				parseMoveMultiplayer(move, whiteTurn);
+				
+				if (move.contains("list")) {
+					String piece = input.nextLine();
+					listPossibleMoves(piece);
+				} else {
+					parseMoveMultiplayer(move, whiteTurn);
+				}
 			}
 		}
 		
@@ -197,8 +225,8 @@ public class Game {
 	 * <p>
 	 * Converts move e.g. d2d4 into start ranks and files and new ranks and files.
 	 * 
-	 * @param move			String representation of move input.
-	 * @param whiteTurn		Boolean which dictates whose turn it is. 
+	 * @param move			    String representation of move input.
+	 * @param whiteTurn		    Boolean which dictates whose turn it is. 
 	 */
 	public void parseMoveMultiplayer(String move, boolean whiteTurn) {
 		int startRank, startFile, newRank, newFile;
@@ -251,13 +279,45 @@ public class Game {
 	} // parseMoveMultiplayer
 	
 	/**
+	 * Lists all possible moves that can be made by a specified piece.
+	 * 
+	 * @param piece             String representation of a piece on the board.
+	 */
+	public void listPossibleMoves(String piece) {
+		int startRank, startFile, destRank;
+		Character destFile;
+		Collection<String> allPossibleMoves = new ArrayList<String>();
+		
+		if (piece.length() != 2 && !move.matches("[a-hA-H][1-8]")) {
+			System.err.println("Error: Invalid piece");
+		} else {
+			startFile = charMap.get(piece.toLowerCase().charAt(0));
+			startRank = 8 - Integer.parseInt(piece.substring(1,2));
+			
+			if (chessBoard.boardArray[startRank][startFile] == null) {
+				System.err.println("Error: No piece found at " + piece.substring(0, 2));
+			} else {
+				allPossibleMoves = chessBoard.boardArray[startRank][startFile].generatePossibleMoves(chessBoard.boardArray, startRank, startFile);
+				
+				System.out.println(piece + " selected\nPossible moves:");
+				
+				for (String move: allPossibleMoves) {
+					destRank = 8 - Integer.parseInt(move.substring(2, 3));
+					destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
+					System.out.println(destFile + "" + destRank);
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Moves a piece on the game board.
 	 * 
-	 * @param boardArray    Array of Pieces on the Board.
-	 * @param startRank     Starting Rank (Piece to be moved).
-	 * @param startFile     Starting File (Piece to be moved).
-	 * @param destRank      Destination Rank.
-	 * @param destFile      Destination File.   
+	 * @param boardArray        Array of Pieces on the Board.
+	 * @param startRank         Starting Rank (Piece to be moved).
+	 * @param startFile         Starting File (Piece to be moved).
+	 * @param destRank          Destination Rank.
+	 * @param destFile          Destination File.   
 	 */
 	public void movePiece(Piece[][] boardArray, int startRank,  int startFile, int destRank, int destFile) {
 		boardArray[destRank][destFile] = null;
@@ -271,12 +331,12 @@ public class Game {
 	 * <p>
 	 * Tries to match the chosen move with all possible moves for the selected piece.
 	 * 
-	 * @param boardArray    Array of Pieces on the Board.
-	 * @param startRank     Starting Rank (Piece to be moved).
-	 * @param startFile     Starting File (Piece to be moved).
-	 * @param destRank      Destination Rank.
-	 * @param destFile      Destination File.
-	 * @return              True for legal move, False for illegal move.
+	 * @param boardArray        Array of Pieces on the Board.
+	 * @param startRank         Starting Rank (Piece to be moved).
+	 * @param startFile         Starting File (Piece to be moved).
+	 * @param destRank          Destination Rank.
+	 * @param destFile          Destination File.
+	 * @return                  True for legal move, False for illegal move.
 	 */
 	public boolean isLegalMove(Piece[][] boardArray, int startRank, int startFile, int destRank, int destFile) {
 		String move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank) + String.valueOf(destFile);

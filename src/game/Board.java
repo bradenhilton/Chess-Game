@@ -13,7 +13,7 @@ public class Board {
 	protected Piece[][] boardArray = new Piece[ranks][files];
 	
 	/**
-	 * 
+	 * Creates the game board.
 	 */
 	public Board() {
 		resetBoard(boardArray);
@@ -23,12 +23,12 @@ public class Board {
 	/**
 	 * Prints the board to the console.
 	 * 
-	 * @param board
+	 * @param board             The game board.
 	 */
 	public void printBoard(Piece[][] board) {
-		System.out.println("\n " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h ");
+		System.out.print("\n " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h \n");
 		for (int i = 0; i < ranks; i++) {
-			System.out.println("  -------------------------------------------------");
+			System.out.print("  -------------------------------------------------\n");
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < files; j++) {
 				System.out.print("| ");
@@ -40,16 +40,16 @@ public class Board {
 				System.out.print(" ");
 			}
 			System.out.print("|");
-			System.out.println(" " + (8 - i));
+			System.out.print(" " + (8 - i) + "\n");
 		}
-		System.out.println("  -------------------------------------------------");
-		System.out.println(" " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h\n");
-	}
+		System.out.print("  -------------------------------------------------\n");
+		System.out.print(" " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h\n");
+	} // printBoard
 	
 	/**
 	 * Resets the board at the start of a game.
 	 * 
-	 *  @param board
+	 *  @param board            The game board.
 	 */
 	public void resetBoard(Piece[][] board) {
 		board[0][0] = new Rook(Player.BLACK);
@@ -87,5 +87,5 @@ public class Board {
 		board[7][5] = new Bishop(Player.WHITE);
 		board[7][6] = new Knight(Player.WHITE);
 		board[7][7] = new Rook(Player.WHITE);
-	}
+	} // resetBoard
 } // Board

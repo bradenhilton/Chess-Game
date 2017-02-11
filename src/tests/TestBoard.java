@@ -1,6 +1,6 @@
 package tests;
 
-import pieces.*;
+import pieces.Piece;;
 
 /**
  * @author Braden Hilton - 14017272
@@ -13,8 +13,9 @@ public class TestBoard {
 	protected Piece[][] boardArray = new Piece[ranks][files];
 	
 	/**
+	 * Creates a custom board for testing purposes.
 	 * 
-	 * @param customBoardArray
+	 * @param customBoardArray  Custom board array obtained from test files for pieces.
 	 */
 	public TestBoard(Piece[][] customBoardArray) {
 		boardArray = customBoardArray;
@@ -22,14 +23,14 @@ public class TestBoard {
 	}
 	
 	/**
-	 * Prints the board to the console
+	 * Prints the board to the console.
 	 * 
-	 * @param board
+	 * @param board             Game board to be printed.
 	 */
 	public void printBoard(Piece[][] board) {
-		System.out.println("\n " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h ");
+		System.out.print("\n " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h \n");
 		for (int i = 0; i < ranks; i++) {
-			System.out.println("  -------------------------------------------------");
+			System.out.print("  -------------------------------------------------\n");
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < files; j++) {
 				System.out.print("| ");
@@ -41,9 +42,9 @@ public class TestBoard {
 				System.out.print(" ");
 			}
 			System.out.print("|");
-			System.out.println(" " + (8 - i));
+			System.out.print(" " + (8 - i) + "\n");
 		}
-		System.out.println("  -------------------------------------------------");
-		System.out.println(" " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h\n");
-	}
+		System.out.print("  -------------------------------------------------\n");
+		System.out.print(" " + spacer + " a " + spacer + " b " + spacer + " c " + spacer + " d " + spacer + " e " + spacer + " f " + spacer + " g " + spacer + " h\n");
+	} // printBoard
 } // TestBoard
