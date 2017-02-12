@@ -32,6 +32,10 @@ public abstract class Piece {
 		this.hasMoved = true;
 	}
 	
+	public boolean getMoved() {
+		return hasMoved;
+	}
+	
 	public abstract PieceType getPieceType();
 	
 	public abstract Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile);

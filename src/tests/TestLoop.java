@@ -55,9 +55,10 @@ public class TestLoop {
 	private void testLoop(TestBoard board, boolean whiteTurn) {
 		while (!gameOver) {
 			if (legalMove) {
-				System.out.println("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
 				board.printBoard(board.boardArray);
 			}
+		
+//			isCheck(board);
 			
 			if (whiteTurn) {
 				if (!moveHistory.isEmpty()) {
@@ -121,8 +122,8 @@ public class TestLoop {
 					if (!(board.boardArray[startRank][startFile].getPlayer() == Player.WHITE)) {
 						System.err.println("Error: Invalid move, White cannot move Black");
 					} else {
-						if (isLegalMove(board.boardArray, startRank, startFile, newRank, newFile)) {
-							movePiece(board.boardArray, startRank, startFile, newRank, newFile);
+						if (isLegalMove(board, startRank, startFile, newRank, newFile)) {
+							movePiece(board, startRank, startFile, newRank, newFile);
 							
 							moveHistory.add("White " + move.toLowerCase());
 							legalMove = true;
@@ -136,8 +137,8 @@ public class TestLoop {
 					if (!(board.boardArray[startRank][startFile].getPlayer() == Player.BLACK)) {
 						System.err.println("Error: Invalid move, Black cannot move White");
 					} else {
-						if (isLegalMove(board.boardArray, startRank, startFile, newRank, newFile)) {
-							movePiece(board.boardArray, startRank, startFile, newRank, newFile);
+						if (isLegalMove(board, startRank, startFile, newRank, newFile)) {
+							movePiece(board, startRank, startFile, newRank, newFile);
 							
 							moveHistory.add("Black " + move.toLowerCase());
 							legalMove = true;
@@ -155,10 +156,11 @@ public class TestLoop {
 	 * 
 	 * @param board             Custom game board.
 	 * @param piece             String representation of a piece on the board.
+	 * @return 
 	 */
-	public void listPossibleMoves(TestBoard board, String piece) {
-		int startRank, startFile, destRank;
-		Character destFile;
+	public List<String> listPossibleMoves(TestBoard board, String piece) {
+		int startRank, startFile, destRank, newRank, newFile;
+		char destFile;
 		Collection<String> allPossibleMoves = new ArrayList<String>();
 		
 		if (piece.length() != 2 && !move.matches("[a-hA-H][1-8]")) {
@@ -177,28 +179,60 @@ public class TestLoop {
 				for (String move: allPossibleMoves) {
 					destRank = 8 - Integer.parseInt(move.substring(2, 3));
 					destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
-					System.out.println(destFile + "" + destRank);
+					
+					newRank = Integer.parseInt(move.substring(2, 3));
+					newFile = Integer.parseInt(move.substring(3, 4));
+					board.boardArray[newRank][newFile] = new Pawn(Player.BLACK);
+					System.out.println(destFile + "" + destRank + move.substring(4));
 				}
 				
 				System.out.println();
+				board.printBoard(board.boardArray);
 			}
 		}
+		return (List<String>) allPossibleMoves;
 	}
+	
+//	public void isCheck(TestBoard board) {
+//		int kingRank;
+//		char kingFile;
+//		List<String> allPossibleMoves = new ArrayList<String>();
+//		for (Piece[] piece : board.boardArray) {
+//			allPossibleMoves = listPossibleMoves(board, piece);
+//		}
+//		
+//		for (String moves : allPossibleMoves) {
+//			if (moves.contains("check")){
+//				kingRank = 8 - Integer.parseInt(moves.substring(2, 3));
+//				kingFile = reverseCharMap.get(Integer.parseInt(moves.substring(3, 4)));
+//				
+//				System.out.println(board.boardArray[kingRank][kingFile].getPlayer().toString() + " "
+//				+ board.boardArray[kingRank][kingFile].getPieceType().toString() + " " + kingFile + kingRank + " IS IN CHECK");
+//				
+//				String newMove = input.nextLine();
+//				if (!(newMove.substring(0, 1).equals(String.valueOf(kingFile))) && !(newMove.substring(1, 2).equals(String.valueOf(kingRank)))) {
+//					System.err.println("Error: " + board.boardArray[kingRank][kingFile].getPlayer().toString() + "MUST GET OUT OF CHECK");
+//				} else {
+//					parseMoveTest(board, newMove, whiteTurn);
+//				}
+//			}
+//		}
+//	}
 
 	/**
 	 * Moves a piece on the game board.
 	 * 
-	 * @param boardArray        Array of Pieces on the Board.
+	 * @param board             Custom game board.
 	 * @param startRank         Starting Rank (Piece to be moved).
 	 * @param startFile         Starting File (Piece to be moved).
 	 * @param destRank          Destination Rank.
 	 * @param destFile          Destination File.   
 	 */
-	public void movePiece(Piece[][] boardArray, int startRank,  int startFile, int destRank, int destFile) {
-		boardArray[destRank][destFile] = null;
-		boardArray[destRank][destFile] = boardArray[startRank][startFile];
-		boardArray[startRank][startFile] = null;
-		boardArray[destRank][destFile].setMoved();
+	public void movePiece(TestBoard board, int startRank,  int startFile, int destRank, int destFile) {
+		board.boardArray[destRank][destFile] = null;
+		board.boardArray[destRank][destFile] = board.boardArray[startRank][startFile];
+		board.boardArray[startRank][startFile] = null;
+		board.boardArray[destRank][destFile].setMoved();
 	} // movePiece
 	
 	/**
@@ -206,18 +240,41 @@ public class TestLoop {
 	 * <p>
 	 * Tries to match the chosen move with all possible moves for the selected piece.
 	 * 
-	 * @param boardArray        Array of Pieces on the Board.
+	 * @param board             Custom game board.
 	 * @param startRank         Starting Rank (Piece to be moved).
 	 * @param startFile         Starting File (Piece to be moved).
 	 * @param destRank          Destination Rank.
 	 * @param destFile          Destination File.
 	 * @return                  True for legal move, False for illegal move.
 	 */
-	public boolean isLegalMove(Piece[][] boardArray, int startRank, int startFile, int destRank, int destFile) {
+	public boolean isLegalMove(TestBoard board, int startRank, int startFile, int destRank, int destFile) {
 		String destination = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank) + String.valueOf(destFile);
-		if (!boardArray[startRank][startFile].generatePossibleMoves(boardArray, startRank, startFile).contains(destination)) {
+		if (!board.boardArray[startRank][startFile].generatePossibleMoves(board.boardArray, startRank, startFile).contains(destination)) {
 			return false;
 		}
 		return true;
 	} // isLegalMove
+	
+	/**
+	 * Determines if castling is possible in the current game.
+	 * 
+	 * @param board             Custom game board.
+	 * @param startRank         Starting Rank (Piece to be moved).
+	 * @param startFile         Starting File (Piece to be moved).
+	 * @param destRank          Destination Rank.
+	 * @param destFile          Destination File.
+	 * @return                  True if castling is possible, False if not.
+	 */
+	public boolean canCastle(TestBoard board, int startRank, int startFile, int destRank, int destFile) {
+		if ((board.boardArray[startRank][startFile].getPieceType() == PieceType.KING && board.boardArray[destRank][destFile].getPieceType() == PieceType.KNIGHT)
+				|| (board.boardArray[startRank][startFile].getPieceType() == PieceType.KNIGHT && board.boardArray[destRank][destFile].getPieceType() == PieceType.KING)) {
+			if (board.boardArray[startRank][startFile].getMoved() == false && board.boardArray[destRank][destFile].getMoved() == false) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} // canCastle
 }

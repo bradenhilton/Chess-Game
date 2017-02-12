@@ -29,16 +29,268 @@ public class Bishop extends Piece {
 
 	@Override
 	public Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
-		//int deltaRank = Math.abs(destRank - startRank);
-		//int deltaFile = Math.abs(destFile - startFile);
+		// negative (-) indicates up or left
+		// positive (+) indicates down or right
 		
-		//return deltaRank == deltaFile;
 		List<String> possibleMoves = new ArrayList<String>();
 		
 		if (m_player == Player.BLACK) {
+			blackUpLeft: {
+				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
+					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.BLACK)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break blackUpLeft;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break blackUpLeft;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.BLACK)) {
+								// don't capture black and stop loop
+								break blackUpLeft;
+							}
+						}
+					}
+				}
+			} // blackUpLeft
+			
+			blackUpRight: {
+				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
+					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.BLACK)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break blackUpRight;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break blackUpRight;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.BLACK)) {
+								// don't capture black and stop loop
+								break blackUpRight;
+							}
+						}
+					}
+				}
+			} // blackUpRight
+			
+			blackDownLeft: {
+				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
+					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.BLACK)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break blackDownLeft;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break blackDownLeft;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.BLACK)) {
+								// don't capture black and stop loop
+								break blackDownLeft;
+							}
+						}
+					}
+				}
+			} // blackDownLeft
+			
+			blackDownRight: {
+				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
+					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.BLACK)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break blackDownRight;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break blackDownRight;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.BLACK)) {
+								// don't capture black and stop loop
+								break blackDownRight;
+							}
+						}
+					}
+				}
+			} // blackDownRight
 			
 		} else if (m_player == Player.WHITE) {
+			whiteUpLeft: {
+				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
+					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.WHITE)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break whiteUpLeft;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break whiteUpLeft;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.WHITE)) {
+								// don't capture white and stop loop
+								break whiteUpLeft;
+							}
+						}
+					}
+				}
+			} // whiteUpLeft
 			
+			whiteUpRight: {
+				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
+					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.WHITE)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break whiteUpRight;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break whiteUpRight;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.WHITE)) {
+								// don't capture white and stop loop
+								break whiteUpRight;
+							}
+						}
+					}
+				}
+			} // whiteUpRight
+			
+			whiteDownLeft: {
+				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
+					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.WHITE)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break whiteDownLeft;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break whiteDownLeft;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.WHITE)) {
+								// don't capture white and stop loop
+								break whiteDownLeft;
+							}
+						}
+					}
+				}
+			} // whiteDownLeft
+			
+			whiteDownRight: {
+				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
+					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
+						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+							if (boardArray[tempRank][tempFile] == null) {
+								// move up and left
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+								
+								break;
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player != Player.WHITE)) {
+								if (boardArray[startRank][tempFile].getPieceType() == PieceType.KING) {
+									// check
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " check");
+									
+									break whiteDownRight;
+								} else {
+									// capture and stop loop
+									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									
+									break whiteDownRight;
+								}
+							} else if ((boardArray[tempRank][tempFile] != null && boardArray[tempRank][tempFile].m_player == Player.WHITE)) {
+								// don't capture white and stop loop
+								break whiteDownRight;
+							}
+						}
+					}
+				}
+			} // whiteDownRight
 		}
 		
 		return possibleMoves;

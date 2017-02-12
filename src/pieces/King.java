@@ -29,6 +29,9 @@ public class King extends Piece {
 	
 	@Override
 	public Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
+		// negative (-) indicates up or left
+		// positive (+) indicates down or right
+		
 		List<String> possibleMoves = new ArrayList<String>();
 		
 		if (m_player == Player.BLACK) {

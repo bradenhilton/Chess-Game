@@ -27,6 +27,7 @@ public class PawnTest {
 		System.out.println("7) Capture Right");
 		System.out.println("8) En-Passant");
 		System.out.println("9) Promotion");
+		System.out.println("10) Check test");
 		
 		try {
 			test = Integer.parseInt(selection.nextLine());
@@ -35,51 +36,66 @@ public class PawnTest {
 		}
 		
 		switch (test) {
-			case 1: boardArray[6][3] = new Pawn(Player.WHITE);
-					boardArray[1][5] = new Pawn(Player.BLACK);
-					TestBoard board1 = new TestBoard(boardArray);
-					new TestLoop(board1);
-					break;
-			case 2: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[1][5] = new Pawn(Player.BLACK);
-					TestBoard board2 = new TestBoard(boardArray);
-					new TestLoop(board2);
-					break;
-			case 3: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[1][5] = new Pawn(Player.BLACK);
-					TestBoard board3 = new TestBoard(boardArray);
-					new TestLoop(board3);
-					break;
-			case 4: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[5][5] = new Pawn(Player.WHITE);
-					TestBoard board4 = new TestBoard(boardArray);
-					new TestLoop(board4);
-					break;
-			case 5: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[5][5] = new Pawn(Player.BLACK);
-					TestBoard board5 = new TestBoard(boardArray);
-					new TestLoop(board5);
-					break;
-			case 6: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[5][4] = new Pawn(Player.BLACK);
-					TestBoard board6 = new TestBoard(boardArray);
-					new TestLoop(board6);
-					break;
-			case 7: boardArray[6][5] = new Pawn(Player.WHITE);
-					boardArray[5][6] = new Pawn(Player.BLACK);
-					TestBoard board7 = new TestBoard(boardArray);
-					new TestLoop(board7);
-					break;
-			case 8:	boardArray[4][4] = new Pawn(Player.WHITE);
-					boardArray[1][3] = new Pawn(Player.BLACK);
-					TestBoard board8 = new TestBoard(boardArray);
-					new TestLoop(board8);
-					break;
-			case 9: boardArray[1][3] = new Pawn(Player.WHITE);
-					boardArray[6][5] = new Pawn(Player.BLACK);
-					TestBoard board9 = new TestBoard(boardArray);
-					new TestLoop(board9);
-					break;
+			case 1:
+				boardArray[6][3] = new Pawn(Player.WHITE);
+				boardArray[1][5] = new Pawn(Player.BLACK);
+				TestBoard board1 = new TestBoard(boardArray);
+				new TestLoop(board1);
+				break;
+			case 2:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[1][5] = new Pawn(Player.BLACK);
+				TestBoard board2 = new TestBoard(boardArray);
+				new TestLoop(board2);
+				break;
+			case 3:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[1][5] = new Pawn(Player.BLACK);
+				TestBoard board3 = new TestBoard(boardArray);
+				new TestLoop(board3);
+				break;
+			case 4:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[5][5] = new Pawn(Player.WHITE);
+				TestBoard board4 = new TestBoard(boardArray);
+				new TestLoop(board4);
+				break;
+			case 5:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[5][5] = new Pawn(Player.BLACK);
+				TestBoard board5 = new TestBoard(boardArray);
+				new TestLoop(board5);
+				break;
+			case 6:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[5][4] = new Pawn(Player.BLACK);
+				TestBoard board6 = new TestBoard(boardArray);
+				new TestLoop(board6);
+				break;
+			case 7:
+				boardArray[6][5] = new Pawn(Player.WHITE);
+				boardArray[5][6] = new Pawn(Player.BLACK);
+				TestBoard board7 = new TestBoard(boardArray);
+				new TestLoop(board7);
+				break;
+			case 8:
+				boardArray[4][4] = new Pawn(Player.WHITE);
+				boardArray[1][3] = new Pawn(Player.BLACK);
+				TestBoard board8 = new TestBoard(boardArray);
+				new TestLoop(board8);
+				break;
+			case 9:
+				boardArray[1][3] = new Pawn(Player.WHITE);
+				boardArray[6][5] = new Pawn(Player.BLACK);
+				TestBoard board9 = new TestBoard(boardArray);
+				new TestLoop(board9);
+				break;
+			case 10:
+				boardArray[7][5] = new Pawn(Player.WHITE);
+				boardArray[5][4] = new King(Player.BLACK);
+				TestBoard board10 = new TestBoard(boardArray);
+				new TestLoop(board10);
+				break;
 		}
 		
 		selection.close();

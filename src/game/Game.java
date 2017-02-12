@@ -304,7 +304,8 @@ public class Game {
 				for (String move: allPossibleMoves) {
 					destRank = 8 - Integer.parseInt(move.substring(2, 3));
 					destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
-					System.out.println(destFile + "" + destRank);
+					
+					System.out.println(destFile + "" + destRank + move.substring(4));
 				}
 			}
 		}
