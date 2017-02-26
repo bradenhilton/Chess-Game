@@ -46,11 +46,13 @@ public class Game {
 		reverseCharMap.put(7, 'h');
 		
 		if (numPlayers == 1) {
-			singleplayerLoop(whiteTurn);
+			//singleplayerLoop(whiteTurn);
+			SingleplayerGame sg = new SingleplayerGame(chessBoard, charMap, reverseCharMap, whiteTurn);
 		}
 		
 		if (numPlayers == 2) {
-			multiplayerLoop(whiteTurn);
+			//multiplayerLoop(whiteTurn);
+			MultiplayerGame mg = new MultiplayerGame(chessBoard, charMap, reverseCharMap, whiteTurn);
 		}
 	}
 	

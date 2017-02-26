@@ -249,10 +249,15 @@ public class TestLoop {
 	 */
 	public boolean isLegalMove(TestBoard board, int startRank, int startFile, int destRank, int destFile) {
 		String destination = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank) + String.valueOf(destFile);
-		if (!board.boardArray[startRank][startFile].generatePossibleMoves(board.boardArray, startRank, startFile).contains(destination)) {
-			return false;
+		Collection<String> possibleMoves = board.boardArray[startRank][startFile].generatePossibleMoves(board.boardArray, startRank, startFile);
+		
+		for (String move : possibleMoves) {
+			if (move.substring(0, 4).equals(destination)) {
+				return true;
+			}
 		}
-		return true;
+		
+		return false;
 	} // isLegalMove
 	
 	/**

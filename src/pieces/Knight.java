@@ -1,7 +1,6 @@
 package pieces;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import game.Player;
@@ -28,17 +27,45 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
+	public List<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
 		// negative (-) indicates up or left
 		// positive (+) indicates down or right
 		
 		List<String> possibleMoves = new ArrayList<String>();
 		
-		if (m_player == Player.BLACK) {
+		int[][] offsets = {
+	            {-2, 1},
+	            {-1, 2},
+	            {1, 2},
+	            {2, 1},
+	            {2, -1},
+	            {1, -2},
+	            {-1, -2},
+	            {-2, -1}
+	        };
+		
+		for (int[] o : offsets) {
+			int tempRank = startRank + o[0];
+			int tempFile = startFile + o[1];
 			
-		} else if (m_player == Player.WHITE) {
-			
+			if ((tempRank >= 0 && tempRank <= 7) && (tempFile >= 0 && tempFile <= 7)) {
+				if (boardArray[tempRank][tempFile] == null) {
+					possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
+				} else if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+					if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+						possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+					} else {
+						possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile) + " c" + boardArray[tempRank][tempFile].getPieceType());
+					}
+				}
+			}
 		}
+		
+//		if (m_player == Player.BLACK) {
+//			
+//		} else if (m_player == Player.WHITE) {
+//			
+//		}
 		
 		return possibleMoves;
 	}

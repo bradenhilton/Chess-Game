@@ -1,8 +1,11 @@
 package tests;
 
-import java.util.*;
-import game.*;
-import pieces.*;
+import java.util.Scanner;
+
+import game.Player;
+import pieces.Pawn;
+import pieces.King;
+import pieces.Piece;
 
 /**
  * @author Braden Hilton - 14017272

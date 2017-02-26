@@ -1,6 +1,6 @@
 package pieces;
 
-import java.util.Collection;
+import java.util.List;
 
 import game.Player;
 
@@ -38,5 +38,5 @@ public abstract class Piece {
 	
 	public abstract PieceType getPieceType();
 	
-	public abstract Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile);
+	public abstract List<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile);
 }

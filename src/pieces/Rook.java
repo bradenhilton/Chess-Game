@@ -1,7 +1,6 @@
 package pieces;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import game.Player;
@@ -24,7 +23,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public Collection<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
+	public List<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
 		// negative (-) indicates up or left
 		// positive (+) indicates down or right
 		
