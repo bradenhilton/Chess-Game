@@ -18,8 +18,10 @@ public class GetPlayers {
 		}
 	} // main
 	
-	/*
-	 * Gets number of players via command line arguments
+	/**
+	 * Gets number of players from command line arguments.
+	 * 
+	 * @param args              Number of Players.
 	 */
 	private static void getArgsInput(String[] args) {
 		if (args.length == 0) {
@@ -54,8 +56,8 @@ public class GetPlayers {
 		}
 	} // getArgsInput
 	
-	/*
-	 * Gets number of players via user input
+	/**
+	 * Gets number of players from user input.
 	 */
 	private static void getPlayersInput() {
 		boolean acceptInput = false;

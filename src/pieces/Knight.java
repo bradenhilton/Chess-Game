@@ -61,12 +61,6 @@ public class Knight extends Piece {
 			}
 		}
 		
-//		if (m_player == Player.BLACK) {
-//			
-//		} else if (m_player == Player.WHITE) {
-//			
-//		}
-		
 		return possibleMoves;
 	}
 }

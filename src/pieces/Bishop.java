@@ -37,7 +37,7 @@ public class Bishop extends Piece {
 			blackUpLeft: {
 				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
 					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -69,7 +69,7 @@ public class Bishop extends Piece {
 			blackUpRight: {
 				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
 					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -101,7 +101,7 @@ public class Bishop extends Piece {
 			blackDownLeft: {
 				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
 					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -133,7 +133,7 @@ public class Bishop extends Piece {
 			blackDownRight: {
 				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
 					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -166,7 +166,7 @@ public class Bishop extends Piece {
 			whiteUpLeft: {
 				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
 					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -198,7 +198,7 @@ public class Bishop extends Piece {
 			whiteUpRight: {
 				for (int tempRank = startRank-1; tempRank >= 0; tempRank--) {
 					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -230,7 +230,7 @@ public class Bishop extends Piece {
 			whiteDownLeft: {
 				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
 					for (int tempFile = startFile-1; tempFile >= 0; tempFile--) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));
@@ -262,7 +262,7 @@ public class Bishop extends Piece {
 			whiteDownRight: {
 				for (int tempRank = startRank+1; tempRank <= 7; tempRank++) {
 					for (int tempFile = startFile+1; tempFile <= 7; tempFile++) {
-						if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+						if (Math.abs(startRank - tempRank) == Math.abs(startFile - tempFile)) {
 							if (boardArray[tempRank][tempFile] == null) {
 								// move up and left
 								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile));

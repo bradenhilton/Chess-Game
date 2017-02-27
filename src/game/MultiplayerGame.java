@@ -26,6 +26,13 @@ public class MultiplayerGame {
 		multiplayerLoop(whiteTurn);
 	}
 	
+	/**
+	 * Game loop for two players.
+	 * <p>
+	 * Allows user input for moves from both players.
+	 * 
+	 * @param whiteTurn		    Boolean which dictates whose turn it is.
+	 */
 	private void multiplayerLoop(boolean whiteTurn) {
 		while (!gameOver) {
 			if (legalMove) {
@@ -133,6 +140,11 @@ public class MultiplayerGame {
 		}
 	} // parseMoveMultiplayer
 	
+	/**
+	 * Lists all possible moves that can be made by a specified piece.
+	 * 
+	 * @param piece             String representation of a piece on the board.
+	 */
 	public void listPossibleMoves(String piece) {
 		int startRank, startFile, destRank;
 		Character destFile;
@@ -161,6 +173,15 @@ public class MultiplayerGame {
 		}
 	}
 	
+	/**
+	 * Moves a piece on the game board.
+	 * 
+	 * @param boardArray        Array of Pieces on the Board.
+	 * @param startRank         Starting Rank (Piece to be moved).
+	 * @param startFile         Starting File (Piece to be moved).
+	 * @param destRank          Destination Rank.
+	 * @param destFile          Destination File.   
+	 */
 	public void movePiece(Piece[][] boardArray, int startRank,  int startFile, int destRank, int destFile) {
 		boardArray[destRank][destFile] = null;
 		boardArray[destRank][destFile] = boardArray[startRank][startFile];
@@ -168,6 +189,18 @@ public class MultiplayerGame {
 		boardArray[destRank][destFile].setMoved();
 	} // movePiece
 	
+	/**
+	 * Checks move is legal.
+	 * <p>
+	 * Tries to match the chosen move with all possible moves for the selected piece.
+	 * 
+	 * @param boardArray        Array of Pieces on the Board.
+	 * @param startRank         Starting Rank (Piece to be moved).
+	 * @param startFile         Starting File (Piece to be moved).
+	 * @param destRank          Destination Rank.
+	 * @param destFile          Destination File.
+	 * @return                  True for legal move, False for illegal move.
+	 */
 	public boolean isLegalMove(Piece[][] boardArray, int startRank, int startFile, int destRank, int destFile) {
 		String move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank) + String.valueOf(destFile);
 		List<String> possibleMoves = boardArray[startRank][startFile].generatePossibleMoves(boardArray, startRank, startFile);

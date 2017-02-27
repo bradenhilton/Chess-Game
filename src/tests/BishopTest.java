@@ -18,7 +18,7 @@ public class BishopTest {
 		Scanner selection = new Scanner(System.in);
 		
 		System.out.println("Which test would you like to do?");
-		System.out.println("1) ");
+		System.out.println("1) List all possible moves");
 		System.out.println("2) ");
 		System.out.println("3) ");
 		System.out.println("4) ");
@@ -32,7 +32,10 @@ public class BishopTest {
 		}
 		
 		switch (test) {
-		case 1: boardArray[6][5] = new Bishop(Player.WHITE);
+		case 1: boardArray[5][3] = new Bishop(Player.WHITE);
+				boardArray[0][4] = new King(Player.BLACK);
+				boardArray[2][3] = new Bishop(Player.BLACK);
+				boardArray[7][4] = new King(Player.WHITE);
 				TestBoard board1 = new TestBoard(boardArray);
 				new TestLoop(board1);
 				break;
