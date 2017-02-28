@@ -31,7 +31,7 @@ public class Pawn extends Piece {
 		// negative (-) indicates up or left
 		// positive (+) indicates down or right
 		
-		List<String> possibleMoves = new ArrayList<String>();
+List<String> possibleMoves = new ArrayList<String>();
 		
 		int[][] offsets = null;
 		
@@ -79,9 +79,11 @@ public class Pawn extends Piece {
 				if (tempFile != startFile) {
 					if ((boardArray[tempRank][tempFile] != null) && (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player)) {
 						if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+							+ " check");
 						} else {
-							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile) + " c" + boardArray[tempRank][tempFile].getPieceType());
+							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+							+ " c" + boardArray[tempRank][tempFile].getPieceType());
 						}
 					}
 				} else {

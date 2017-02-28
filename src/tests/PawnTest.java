@@ -32,10 +32,14 @@ public class PawnTest {
 		System.out.println("9) Promotion");
 		System.out.println("10) Check test");
 		
-		try {
-			test = Integer.parseInt(selection.nextLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println(nfe);
+		String input;
+		while (test == 0) {			
+			input = selection.nextLine();
+			if (!(input.matches("[0-9]"))) {
+				System.out.println("Please enter a number");
+			} else {				
+				test = Integer.parseInt(input);
+			}
 		}
 		
 		switch (test) {

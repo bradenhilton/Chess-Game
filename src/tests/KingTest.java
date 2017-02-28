@@ -3,8 +3,7 @@ package tests;
 import java.util.Scanner;
 
 import game.Player;
-import pieces.King;
-import pieces.Piece;
+import pieces.*;
 
 public class KingTest {
 	private static int ranks = 8;
@@ -22,17 +21,21 @@ public class KingTest {
 		System.out.println("4) Capture diagonally");
 		System.out.println("5) Capture horizontally and vertically");
 		
-		try {
-			test = Integer.parseInt(selection.nextLine());
-		} catch (NumberFormatException nfe) {
-			System.err.println(nfe);
+		String input;
+		while (test == 0) {			
+			input = selection.nextLine();
+			if (!(input.matches("[0-9]"))) {
+				System.out.println("Please enter a number");
+			} else {				
+				test = Integer.parseInt(input);
+			}
 		}
 		
 		switch (test) {
 		case 1: 
 			boardArray[4][3] = new King(Player.WHITE);
-			boardArray[6][3] = new King(Player.WHITE);
-			boardArray[5][5] = new King(Player.WHITE);
+			boardArray[2][2] = new Rook(Player.BLACK);
+			boardArray[5][1] = new Rook(Player.BLACK);
 			
 			//boardArray[4][3] = new King(Player.BLACK);
 			//boardArray[6][3] = new King(Player.BLACK);

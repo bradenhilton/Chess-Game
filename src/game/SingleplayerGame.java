@@ -76,7 +76,6 @@ public class SingleplayerGame {
 				int randMove = rand.nextInt(allMoves.size());
 				
 				move = allMoves.get(randMove).substring(0, 4);
-				System.out.println("Black wants to move " + move);
 				
 				Character startFile = reverseCharMap.get(Integer.parseInt(move.substring(1, 2)));
 				int startRank = 8 - Integer.parseInt(move.substring(0, 1));
@@ -85,7 +84,6 @@ public class SingleplayerGame {
 				int newRank = 8 - Integer.parseInt(move.substring(2, 3));
 				
 				move = startFile + String.valueOf(startRank) + newFile + String.valueOf(newRank);
-				System.out.println("Black wants to move " + move);
 				
 				parseMoveSingleplayer(move, whiteTurn);
 			}
