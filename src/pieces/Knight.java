@@ -57,7 +57,7 @@ public class Knight extends Piece {
 						+ " check");
 					} else {
 						possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-						+ " c" + boardArray[tempRank][tempFile].getPieceType());
+						+ " capture " + boardArray[tempRank][tempFile].getPieceType());
 					}
 				}
 			}

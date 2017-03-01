@@ -48,7 +48,7 @@ public class Bishop extends Piece {
 									break upLeft;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break upLeft;
 								}
@@ -75,7 +75,7 @@ public class Bishop extends Piece {
 									break upRight;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break upRight;
 								}
@@ -102,7 +102,7 @@ public class Bishop extends Piece {
 									break downLeft;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break downLeft;
 								}
@@ -129,7 +129,7 @@ public class Bishop extends Piece {
 									break downRight;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break downRight;
 								}

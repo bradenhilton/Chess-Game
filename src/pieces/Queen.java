@@ -42,7 +42,7 @@ public class Queen extends Piece {
 							break up;
 						} else {
 							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(startFile)
-							+ " c" + boardArray[tempRank][startFile].getPieceType().toString());
+							+ " capture " + boardArray[tempRank][startFile].getPieceType().toString());
 							
 							break up;
 						}
@@ -65,7 +65,7 @@ public class Queen extends Piece {
 							break down;
 						} else {
 							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(startFile)
-							+ " c" + boardArray[tempRank][startFile].getPieceType().toString());
+							+ " capture " + boardArray[tempRank][startFile].getPieceType().toString());
 							
 							break down;
 						}
@@ -88,7 +88,7 @@ public class Queen extends Piece {
 							break left;
 						} else {
 							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank) + String.valueOf(tempFile)
-							+ " c" + boardArray[startRank][tempFile].getPieceType().toString());
+							+ " capture " + boardArray[startRank][tempFile].getPieceType().toString());
 							
 							break left;
 						}
@@ -111,7 +111,7 @@ public class Queen extends Piece {
 							break right;
 						} else {
 							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank) + String.valueOf(tempFile)
-							+ " c" + boardArray[startRank][tempFile].getPieceType().toString());
+							+ " capture " + boardArray[startRank][tempFile].getPieceType().toString());
 							
 							break right;
 						}
@@ -136,7 +136,7 @@ public class Queen extends Piece {
 									break upLeft;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break upLeft;
 								}
@@ -163,7 +163,7 @@ public class Queen extends Piece {
 									break upRight;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break upRight;
 								}
@@ -190,7 +190,7 @@ public class Queen extends Piece {
 									break downLeft;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break downLeft;
 								}
@@ -217,7 +217,7 @@ public class Queen extends Piece {
 									break downRight;
 								} else {
 									possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-									+ " c" + boardArray[tempRank][tempFile].getPieceType().toString());
+									+ " capture " + boardArray[tempRank][tempFile].getPieceType().toString());
 									
 									break downRight;
 								}

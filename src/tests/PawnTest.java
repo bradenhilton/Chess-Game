@@ -88,6 +88,9 @@ public class PawnTest {
 			case 8:
 				boardArray[4][4] = new Pawn(Player.WHITE);
 				boardArray[1][3] = new Pawn(Player.BLACK);
+				
+				//boardArray[5][4] = new Pawn(Player.WHITE);
+				//boardArray[1][3] = new Pawn(Player.BLACK);
 				TestBoard board8 = new TestBoard(boardArray);
 				new TestLoop(board8);
 				break;

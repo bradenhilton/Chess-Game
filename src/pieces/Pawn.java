@@ -31,8 +31,8 @@ public class Pawn extends Piece {
 		// negative (-) indicates up or left
 		// positive (+) indicates down or right
 		
-List<String> possibleMoves = new ArrayList<String>();
-		
+		List<String> possibleMoves = new ArrayList<String>();
+
 		int[][] offsets = null;
 		
 		if (boardArray[startRank][startFile].m_player == Player.BLACK) {
@@ -41,14 +41,18 @@ List<String> possibleMoves = new ArrayList<String>();
 						{1, 0},
 						{2, 0},
 						{1, -1},
-						{1, 1}
+						{1, 1},
+						{0, -1},
+						{0, 1}
 				};
 				offsets = o;
 			} else {
 				int[][] o = {
 						{1, 0},
 						{1, -1},
-						{1, 1}
+						{1, 1},
+						{0, -1},
+						{0, 1}
 				};
 				offsets = o;
 			}
@@ -58,14 +62,18 @@ List<String> possibleMoves = new ArrayList<String>();
 						{-1, 0},
 						{-2, 0},
 						{-1, -1},
-						{-1, 1}
+						{-1, 1},
+						{0, -1},
+						{0, 1}
 				};
 				offsets = o;
 			} else {
 				int[][] o = {
 						{-1, 0},
 						{-1, -1},
-						{-1, 1}
+						{-1, 1},
+						{0, -1},
+						{0, 1}
 				};
 				offsets = o;
 			}
@@ -77,13 +85,28 @@ List<String> possibleMoves = new ArrayList<String>();
 			
 			if ((tempRank >= 0 && tempRank <= 7) && (tempFile >= 0 && tempFile <= 7)) {
 				if (tempFile != startFile) {
-					if ((boardArray[tempRank][tempFile] != null) && (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player)) {
-						if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-							+ " check");
-						} else {
-							possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
-							+ " c" + boardArray[tempRank][tempFile].getPieceType());
+					if (tempRank != startRank) {						
+						if ((boardArray[tempRank][tempFile] != null) && (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player)) {
+							if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+								+ " check");
+							} else {
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank) + String.valueOf(tempFile)
+								+ " capture " + boardArray[tempRank][tempFile].getPieceType());
+							}
+						}
+					} else {
+						if (boardArray[tempRank][tempFile] != null
+								&& boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player
+								&& boardArray[tempRank][tempFile].getPieceType() == PieceType.PAWN
+								&& boardArray[tempRank][tempFile].hasMovedTwo == true) {
+							if (boardArray[startRank][startFile].m_player == Player.BLACK) {
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank + 1) + String.valueOf(tempFile)
+								+ " capture " + boardArray[tempRank][tempFile].getPieceType() + " en passant");
+							} else {
+								possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank - 1) + String.valueOf(tempFile)
+								+ " capture " + boardArray[tempRank][tempFile].getPieceType() + " en passant");
+							}
 						}
 					}
 				} else {

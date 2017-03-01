@@ -3,6 +3,7 @@ package game;
 import java.util.*;
 
 import game.Board;
+import pieces.Pawn;
 import pieces.Piece;
 import pieces.PieceType;
 
@@ -19,7 +20,6 @@ public class SingleplayerGame {
 	private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
 	private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
 	private List<String> moveHistory = new ArrayList<String>();
-	private Board tempBoard;
 	
 	public SingleplayerGame(Board chessBoard, Map<Character, Integer> charMap, Map<Integer, Character>reverseCharMap, boolean whiteTurn) {
 		this.chessBoard = chessBoard;
@@ -104,9 +104,14 @@ public class SingleplayerGame {
 				Character newFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
 				int newRank = 8 - Integer.parseInt(move.substring(2, 3));
 				
-				move = startFile + String.valueOf(startRank) + newFile + String.valueOf(newRank);
+				if (move.substring(4).equalsIgnoreCase("castle")) {
+					move = startFile + String.valueOf(startRank) + newFile + String.valueOf(newRank);
+					castle(move);
+				} else {					
+					move = startFile + String.valueOf(startRank) + newFile + String.valueOf(newRank);
+					parseMoveSingleplayer(move, whiteTurn);
+				}
 				
-				parseMoveSingleplayer(move, whiteTurn);
 			}
 		}
 		
@@ -205,11 +210,15 @@ public class SingleplayerGame {
 				
 				System.out.println(piece + " selected\nPossible moves:");
 				
-				for (String move: allPossibleMoves) {
-					destRank = 8 - Integer.parseInt(move.substring(2, 3));
-					destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
-					
-					System.out.println(destFile + "" + destRank + move.substring(4));
+				if (allPossibleMoves.isEmpty()) {
+					System.out.println("None!");
+				} else {
+					for (String move: allPossibleMoves) {
+						destRank = 8 - Integer.parseInt(move.substring(2, 3));
+						destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
+
+						System.out.println(destFile + "" + destRank + move.substring(4));
+					}
 				}
 			}
 		}
@@ -227,30 +236,80 @@ public class SingleplayerGame {
 		int piece2Rank = Integer.parseInt(kingAndRook.substring(3, 4));
 		int piece2File = Integer.parseInt(kingAndRook.substring(2, 3));
 		
+		// piece1 = king
+		// piece2 = rook
 		if (chessBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.KING
 				&& chessBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.ROOK) {
 			if (chessBoard.boardArray[piece1Rank][piece1File].getMoved() == false
 					&& chessBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
-				tempBoard = new Board();
-				tempBoard  = null;
 				
-				tempBoard.printBoard(tempBoard.boardArray);
-				
-				tempBoard.boardArray[piece1Rank][piece1File] = chessBoard.boardArray[piece1Rank][piece1File];
-				chessBoard.boardArray[piece1Rank][piece1File] = chessBoard.boardArray[piece2Rank][piece2File];
-				chessBoard.boardArray[piece2Rank][piece2File] = tempBoard .boardArray[piece1Rank][piece1File];
-				
-				chessBoard.boardArray[piece1Rank][piece1File].setMoved();
-				chessBoard.boardArray[piece2Rank][piece2File].setMoved();
+				if (piece1File > piece2File) {
+					chessBoard.boardArray[piece1Rank][piece1File - 2] = chessBoard.boardArray[piece1Rank][piece1File];
+					chessBoard.boardArray[piece2Rank][piece1File - 1] = chessBoard.boardArray[piece2Rank][piece2File];
+					
+					chessBoard.boardArray[piece1Rank][piece1File] = null;
+					chessBoard.boardArray[piece2Rank][piece2File] = null;
+					
+					chessBoard.boardArray[piece1Rank][piece1File - 2].setMoved();
+					chessBoard.boardArray[piece2Rank][piece1File - 1].setMoved();
+				} else {
+					chessBoard.boardArray[piece1Rank][piece1File + 2] = chessBoard.boardArray[piece1Rank][piece1File];
+					chessBoard.boardArray[piece2Rank][piece1File + 1] = chessBoard.boardArray[piece2Rank][piece2File];
+					
+					chessBoard.boardArray[piece1Rank][piece1File] = null;
+					chessBoard.boardArray[piece2Rank][piece2File] = null;
+					
+					chessBoard.boardArray[piece1Rank][piece1File + 2].setMoved();
+					chessBoard.boardArray[piece2Rank][piece1File + 1].setMoved();
+				}
 			}
+		// piece 1 = rook
+		// piece 2 = king
 		} else if (chessBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.ROOK
 				&& chessBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.KING) {
 			if (chessBoard.boardArray[piece1Rank][piece1File].getMoved() == false
 					&& chessBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
 				
+				if (piece1File < piece2File) {
+					chessBoard.boardArray[piece1Rank][piece1File - 2] = chessBoard.boardArray[piece1Rank][piece1File];
+					chessBoard.boardArray[piece2Rank][piece1File - 1] = chessBoard.boardArray[piece2Rank][piece2File];
+					
+					chessBoard.boardArray[piece1Rank][piece1File] = null;
+					chessBoard.boardArray[piece2Rank][piece2File] = null;
+					
+					chessBoard.boardArray[piece1Rank][piece1File - 2].setMoved();
+					chessBoard.boardArray[piece2Rank][piece1File - 1].setMoved();
+				} else {
+					chessBoard.boardArray[piece1Rank][piece1File + 2] = chessBoard.boardArray[piece1Rank][piece1File];
+					chessBoard.boardArray[piece2Rank][piece1File + 1] = chessBoard.boardArray[piece2Rank][piece2File];
+					
+					chessBoard.boardArray[piece1Rank][piece1File] = null;
+					chessBoard.boardArray[piece2Rank][piece2File] = null;
+					
+					chessBoard.boardArray[piece1Rank][piece1File + 2].setMoved();
+					chessBoard.boardArray[piece2Rank][piece1File + 1].setMoved();
+				}
 			}
 		}
 	} // castle
+	
+	/**
+	 * Captures a pawn piece en passant.
+	 * 
+	 * @param pawns             String representation of both Pawn pieces.
+	 */
+	public void enPassant(String pawns) {
+		int attackerRank = Integer.parseInt(pawns.substring(1, 2));
+		int attackerFile = Integer.parseInt(pawns.substring(0, 1));
+		
+		int enemyRank = Integer.parseInt(pawns.substring(3, 4));
+		int enemyFile = Integer.parseInt(pawns.substring(2, 3));
+		
+		chessBoard.boardArray[enemyRank][enemyFile] = null;
+		chessBoard.boardArray[enemyRank + 1][enemyFile] = chessBoard.boardArray[attackerRank][attackerFile];
+		chessBoard.boardArray[attackerRank][attackerFile] = null;
+		chessBoard.boardArray[enemyRank + 1][enemyFile].setMoved();
+	}
 	
 	/**
 	 * Moves a piece on the game board.

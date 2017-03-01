@@ -10,7 +10,7 @@ import game.Player;
  */
 public abstract class Piece {
 	protected boolean hasMoved = false;
-	protected boolean enPassant = false;
+	protected boolean hasMovedTwo = false;
 	protected Player m_player;
 	
 	/**
@@ -32,8 +32,16 @@ public abstract class Piece {
 		this.hasMoved = true;
 	}
 	
+	public void setMovedTwo(boolean truefalse) {
+		this.hasMovedTwo = truefalse;
+	}
+	
 	public boolean getMoved() {
 		return hasMoved;
+	}
+	
+	public boolean getMovedTwo() {
+		return hasMovedTwo;
 	}
 	
 	public abstract PieceType getPieceType();

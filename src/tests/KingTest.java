@@ -21,6 +21,7 @@ public class KingTest {
 		System.out.println("4) Capture diagonally");
 		System.out.println("5) Capture horizontally and vertically");
 		System.out.println("6) Castle");
+		System.out.println("7) Blocked Castle");
 		
 		String input;
 		while (test == 0) {			
@@ -58,19 +59,19 @@ public class KingTest {
 			break;
 		case 4:
 			boardArray[4][3] = new King(Player.WHITE);
-			boardArray[2][1] = new King(Player.BLACK);
-			boardArray[2][5] = new King(Player.BLACK);
-			boardArray[6][1] = new King(Player.BLACK);
-			boardArray[6][5] = new King(Player.BLACK);
+			boardArray[3][2] = new Pawn(Player.BLACK);
+			boardArray[3][4] = new Pawn(Player.BLACK);
+			boardArray[5][2] = new Pawn(Player.BLACK);
+			boardArray[5][4] = new Pawn(Player.BLACK);
 			TestBoard board4 = new TestBoard(boardArray);
 			new TestLoop(board4);
 			break;
 		case 5:
 			boardArray[4][3] = new King(Player.WHITE);
-			boardArray[2][3] = new King(Player.BLACK);
-			boardArray[6][3] = new King(Player.BLACK);
-			boardArray[4][1] = new King(Player.BLACK);
-			boardArray[4][5] = new King(Player.BLACK);
+			boardArray[3][3] = new Queen(Player.BLACK);
+			boardArray[5][3] = new Queen(Player.BLACK);
+			boardArray[4][2] = new Queen(Player.BLACK);
+			boardArray[4][4] = new Queen(Player.BLACK);
 			TestBoard board5 = new TestBoard(boardArray);
 			new TestLoop(board5);
 			break;
@@ -80,6 +81,19 @@ public class KingTest {
 			boardArray[7][7] = new Rook(Player.WHITE);
 			TestBoard board6 = new TestBoard(boardArray);
 			new TestLoop(board6);
+			break;
+		case 7:
+			boardArray[7][4] = new King(Player.WHITE);
+			boardArray[7][0] = new Rook(Player.WHITE);
+			boardArray[7][7] = new Rook(Player.WHITE);
+			
+			boardArray[1][7] = new Queen(Player.BLACK);
+			boardArray[0][3] = new Rook(Player.BLACK);
+			
+			//boardArray[7][3] = new Queen(Player.WHITE);
+			//boardArray[7][5] = new Bishop(Player.WHITE);
+			TestBoard board7 = new TestBoard(boardArray);
+			new TestLoop(board7);
 			break;
 		}
 		
