@@ -17,6 +17,8 @@ public class TestLoop {
 	private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
 	private List<String> moveHistory = new ArrayList<String>();
 	private Scanner input = new Scanner(System.in);
+	private TestBoard tempBoard;
+	
 	/**
 	 * Constructor which populates character maps and starts the loop.
 	 * 
@@ -68,9 +70,28 @@ public class TestLoop {
 				System.out.println("White to move (e.g. d2d4)");
 				move = input.nextLine();
 				
-				if (move.contains("list")) {
+				if (move.equalsIgnoreCase("list")) {
 					String piece = input.nextLine();
-					listPossibleMoves(board, piece);
+					
+					if (!piece.matches("[a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of a piece");
+						break;
+					} else if (piece.equalsIgnoreCase("q") || piece.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						listPossibleMoves(board, piece);
+					}
+				} else if (move.equalsIgnoreCase("castle")) {
+					String kingAndRook = input.nextLine();
+					
+					if (!kingAndRook.matches("[a-hA-H][1-8][a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of the king and the rook to castle");
+						break;
+					} else if (kingAndRook.equalsIgnoreCase("q") || kingAndRook.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						castle(board, kingAndRook);
+					}
 				} else {
 					parseMoveTest(board, move, whiteTurn);
 				}
@@ -82,9 +103,28 @@ public class TestLoop {
 				System.out.println("Black to move (e.g. d2d4)");
 				move = input.nextLine();
 
-				if (move.contains("list")) {
+				if (move.equalsIgnoreCase("list")) {
 					String piece = input.nextLine();
-					listPossibleMoves(board, piece);
+					
+					if (!piece.matches("[a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of a piece");
+						break;
+					} else if (piece.equalsIgnoreCase("q") || piece.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						listPossibleMoves(board, piece);
+					}
+				} else if (move.equalsIgnoreCase("castle")) {
+					String kingAndRook = input.nextLine();
+					
+					if (!kingAndRook.matches("[a-hA-H][1-8][a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of the king and the rook to castle");
+						break;
+					} else if (kingAndRook.equalsIgnoreCase("q") || kingAndRook.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						castle(board, kingAndRook);
+					}
 				} else {
 					parseMoveTest(board, move, whiteTurn);
 				}
@@ -234,6 +274,44 @@ public class TestLoop {
 		board.boardArray[startRank][startFile] = null;
 		board.boardArray[destRank][destFile].setMoved();
 	} // movePiece
+	
+	/**
+	 * Castles a King and a Rook.
+	 * 
+	 * @param kingAndRook       String representation of the king and rook locations.
+	 */
+	public void castle(TestBoard board, String kingAndRook) {
+		tempBoard = new TestBoard(tempBoard.boardArray);
+		
+		int piece1Rank = Integer.parseInt(kingAndRook.substring(1, 2));
+		int piece1File = Integer.parseInt(kingAndRook.substring(0, 1));
+		
+		int piece2Rank = Integer.parseInt(kingAndRook.substring(3, 4));
+		int piece2File = Integer.parseInt(kingAndRook.substring(2, 3));
+		
+		if (board.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.KING
+				&& board.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.ROOK) {
+			if (board.boardArray[piece1Rank][piece1File].getMoved() == false
+					&& board.boardArray[piece2Rank][piece2File].getMoved() == false) {
+				tempBoard  = null;
+				
+				tempBoard.printBoard(tempBoard.boardArray);
+				
+				tempBoard.boardArray[piece1Rank][piece1File] = board.boardArray[piece1Rank][piece1File];
+				board.boardArray[piece1Rank][piece1File] = board.boardArray[piece2Rank][piece2File];
+				board.boardArray[piece2Rank][piece2File] = tempBoard .boardArray[piece1Rank][piece1File];
+				
+				board.boardArray[piece1Rank][piece1File].setMoved();
+				board.boardArray[piece2Rank][piece2File].setMoved();
+			}
+		} else if (board.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.ROOK
+				&& board.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.KING) {
+			if (board.boardArray[piece1Rank][piece1File].getMoved() == false
+					&& board.boardArray[piece2Rank][piece2File].getMoved() == false) {
+				
+			}
+		}
+	} // castle
 	
 	/**
 	 * Checks move is legal.

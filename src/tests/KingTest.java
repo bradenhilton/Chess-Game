@@ -20,6 +20,7 @@ public class KingTest {
 		System.out.println("3) Test diagonal moves");
 		System.out.println("4) Capture diagonally");
 		System.out.println("5) Capture horizontally and vertically");
+		System.out.println("6) Castle");
 		
 		String input;
 		while (test == 0) {			
@@ -34,12 +35,6 @@ public class KingTest {
 		switch (test) {
 		case 1: 
 			boardArray[4][3] = new King(Player.WHITE);
-			boardArray[2][2] = new Rook(Player.BLACK);
-			boardArray[5][1] = new Rook(Player.BLACK);
-			
-			//boardArray[4][3] = new King(Player.BLACK);
-			//boardArray[6][3] = new King(Player.BLACK);
-			//boardArray[5][5] = new King(Player.BLACK);
 			TestBoard board1 = new TestBoard(boardArray);
 			new TestLoop(board1);
 			break;
@@ -49,12 +44,6 @@ public class KingTest {
 			boardArray[3][2] = new King(Player.WHITE);
 			boardArray[5][4] = new King(Player.WHITE);
 			boardArray[5][2] = new King(Player.WHITE);
-			
-			//boardArray[4][3] = new King(Player.BLACK);
-			//boardArray[3][4] = new King(Player.BLACK);
-			//boardArray[3][2] = new King(Player.BLACK);
-			//boardArray[5][4] = new King(Player.BLACK);
-			//boardArray[5][2] = new King(Player.BLACK);
 			TestBoard board2 = new TestBoard(boardArray);
 			new TestLoop(board2);
 			break;
@@ -64,12 +53,6 @@ public class KingTest {
 			boardArray[4][2] = new King(Player.WHITE);
 			boardArray[3][3] = new King(Player.WHITE);
 			boardArray[5][3] = new King(Player.WHITE);
-			
-			//boardArray[4][3] = new King(Player.BLACK);
-			//boardArray[4][4] = new King(Player.BLACK);
-			//boardArray[4][2] = new King(Player.BLACK);
-			//boardArray[3][3] = new King(Player.BLACK);
-			//boardArray[5][3] = new King(Player.BLACK);
 			TestBoard board3 = new TestBoard(boardArray);
 			new TestLoop(board3);
 			break;
@@ -79,12 +62,6 @@ public class KingTest {
 			boardArray[2][5] = new King(Player.BLACK);
 			boardArray[6][1] = new King(Player.BLACK);
 			boardArray[6][5] = new King(Player.BLACK);
-			
-			//boardArray[4][3] = new King(Player.BLACK);
-			//boardArray[2][1] = new King(Player.WHITE);
-			//boardArray[2][5] = new King(Player.WHITE);
-			//boardArray[6][1] = new King(Player.WHITE);
-			//boardArray[6][5] = new King(Player.WHITE);
 			TestBoard board4 = new TestBoard(boardArray);
 			new TestLoop(board4);
 			break;
@@ -94,14 +71,15 @@ public class KingTest {
 			boardArray[6][3] = new King(Player.BLACK);
 			boardArray[4][1] = new King(Player.BLACK);
 			boardArray[4][5] = new King(Player.BLACK);
-			
-			//boardArray[4][3] = new King(Player.BLACK);
-			//boardArray[2][3] = new King(Player.WHITE);
-			//boardArray[6][3] = new King(Player.WHITE);
-			//boardArray[4][1] = new King(Player.WHITE);
-			//boardArray[4][5] = new King(Player.WHITE);
 			TestBoard board5 = new TestBoard(boardArray);
 			new TestLoop(board5);
+			break;
+		case 6:
+			boardArray[7][4] = new King(Player.WHITE);
+			boardArray[7][0] = new Rook(Player.WHITE);
+			boardArray[7][7] = new Rook(Player.WHITE);
+			TestBoard board6 = new TestBoard(boardArray);
+			new TestLoop(board6);
 			break;
 		}
 		

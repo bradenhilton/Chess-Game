@@ -4,6 +4,7 @@ import java.util.*;
 
 import game.Board;
 import pieces.Piece;
+import pieces.PieceType;
 
 public class SingleplayerGame {
 	private int ranks = 8;
@@ -18,6 +19,7 @@ public class SingleplayerGame {
 	private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
 	private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
 	private List<String> moveHistory = new ArrayList<String>();
+	private Board tempBoard;
 	
 	public SingleplayerGame(Board chessBoard, Map<Character, Integer> charMap, Map<Integer, Character>reverseCharMap, boolean whiteTurn) {
 		this.chessBoard = chessBoard;
@@ -46,12 +48,31 @@ public class SingleplayerGame {
 					System.out.println(moveHistory.get(moveHistory.size() - 1));
 				}
 				
-				System.out.println("White to move (e.g. d2d4)");
+				System.out.println("White to move (e.g. d2d4 or list or castle)");
 				move = input.nextLine();
 				
-				if (move.contains("list")) {
+				if (move.equalsIgnoreCase("list")) {
 					String piece = input.nextLine();
-					listPossibleMoves(piece);
+					
+					if (!piece.matches("[a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of a piece");
+						break;
+					} else if (piece.equalsIgnoreCase("q") || piece.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						listPossibleMoves(piece);
+					}
+				} else if (move.equalsIgnoreCase("castle")) {
+					String kingAndRook = input.nextLine();
+					
+					if (!kingAndRook.matches("[a-hA-H][1-8][a-hA-H][1-8]")) {
+						System.out.println("Please enter the location of the king and the rook to castle");
+						break;
+					} else if (kingAndRook.equalsIgnoreCase("q") || kingAndRook.equalsIgnoreCase("quit")) {
+						break;
+					} else {
+						castle(kingAndRook);
+					}
 				} else {
 					parseMoveSingleplayer(move, whiteTurn);
 				}
@@ -91,7 +112,7 @@ public class SingleplayerGame {
 		
 		System.out.println("New game? (y/n)");
 		restart = input.nextLine();
-		if (restart.toLowerCase().equals("y") || restart.toLowerCase().equals("yes")) {
+		if (restart.equalsIgnoreCase("y") || restart.equalsIgnoreCase("yes")) {
 			chessBoard = new Board();
 			gameOver = false;
 		} else {
@@ -192,7 +213,44 @@ public class SingleplayerGame {
 				}
 			}
 		}
-	}
+	} // listPossibleMoves
+	
+	/**
+	 * Castles a King and a Rook.
+	 * 
+	 * @param kingAndRook       String representation of the king and rook locations.
+	 */
+	public void castle(String kingAndRook) {
+		int piece1Rank = Integer.parseInt(kingAndRook.substring(1, 2));
+		int piece1File = Integer.parseInt(kingAndRook.substring(0, 1));
+		
+		int piece2Rank = Integer.parseInt(kingAndRook.substring(3, 4));
+		int piece2File = Integer.parseInt(kingAndRook.substring(2, 3));
+		
+		if (chessBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.KING
+				&& chessBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.ROOK) {
+			if (chessBoard.boardArray[piece1Rank][piece1File].getMoved() == false
+					&& chessBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
+				tempBoard = new Board();
+				tempBoard  = null;
+				
+				tempBoard.printBoard(tempBoard.boardArray);
+				
+				tempBoard.boardArray[piece1Rank][piece1File] = chessBoard.boardArray[piece1Rank][piece1File];
+				chessBoard.boardArray[piece1Rank][piece1File] = chessBoard.boardArray[piece2Rank][piece2File];
+				chessBoard.boardArray[piece2Rank][piece2File] = tempBoard .boardArray[piece1Rank][piece1File];
+				
+				chessBoard.boardArray[piece1Rank][piece1File].setMoved();
+				chessBoard.boardArray[piece2Rank][piece2File].setMoved();
+			}
+		} else if (chessBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.ROOK
+				&& chessBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.KING) {
+			if (chessBoard.boardArray[piece1Rank][piece1File].getMoved() == false
+					&& chessBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
+				
+			}
+		}
+	} // castle
 	
 	/**
 	 * Moves a piece on the game board.
