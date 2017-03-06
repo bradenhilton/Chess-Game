@@ -5,5 +5,14 @@ package game;
  * @version 1.0
  */
 public enum Player {
-	WHITE, BLACK;
+    WHITE {
+        public String toString() {
+            return "White";
+        }
+    },
+    BLACK {
+        public String toString() {
+            return "Black";
+        }
+    }
 }
