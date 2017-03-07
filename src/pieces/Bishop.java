@@ -43,8 +43,10 @@ public class Bishop extends Piece {
                         } else {
                             if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                                 if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                                    // possibleMoves.add(String.valueOf(startRank)
+                                    // + String.valueOf(startFile)
+                                    // + String.valueOf(tempRank) +
+                                    // String.valueOf(tempFile) + " check");
 
                                     break upLeft;
                                 } else {
@@ -148,6 +150,48 @@ public class Bishop extends Piece {
                     }
                 }
             }
+        }
+
+        possibleMoves = checkForCheck(possibleMoves);
+
+        return possibleMoves;
+    } // generatePossibleMoves
+
+    public void upLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+        for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
+            for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
+                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+                    if (boardArray[tempRank][tempFile] == null) {
+                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                + String.valueOf(tempRank) + String.valueOf(tempFile));
+                    } else {
+                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+                                // possibleMoves.add(String.valueOf(startRank)
+                                // + String.valueOf(startFile)
+                                // + String.valueOf(tempRank) +
+                                // String.valueOf(tempFile) + " check");
+
+                                break;
+                            } else {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
+                                        + boardArray[tempRank][tempFile].getPieceType().toString());
+
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public List<String> checkForCheck(List<String> possibleMoves) {
+        for (int i = 0; i < possibleMoves.size(); i++) {
+            possibleMoves.set(i, "");
         }
 
         return possibleMoves;

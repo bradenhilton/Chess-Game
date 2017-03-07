@@ -1,7 +1,6 @@
 package tests;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import game.Player;
-import pieces.Pawn;
 import pieces.PieceType;
 
 /**
@@ -72,11 +70,11 @@ public class TestGame {
 
         players = numPlayers;
 
-        if (players == 2) {
-            new TestGameSingleplayer(board, charMap, reverseCharMap, whiteTurn);
-        } else if (players == 1) {
-            new TestGameMultiplayer(board, charMap, reverseCharMap, whiteTurn);
-        }
+        // if (players == 2) {
+        // new TestGameSingleplayer(board, charMap, reverseCharMap, whiteTurn);
+        // } else if (players == 1) {
+        // new TestGameMultiplayer(board, charMap, reverseCharMap, whiteTurn);
+        // }
 
         testGame(board, whiteTurn, players);
     }
@@ -351,6 +349,14 @@ public class TestGame {
                                     legalMove = true;
                                     whiteTurn = false;
                                     testGame(board, whiteTurn, players);
+                                } else if (possibleMoves.get(i).substring(4).contains("check")) {
+                                    movePiece(board, startRank, startFile, newRank, newFile);
+
+                                    moveHistory.add("White " + board.boardArray[newRank][newFile].getPieceType() + " "
+                                            + move.toLowerCase() + " check");
+                                    legalMove = true;
+                                    whiteTurn = false;
+                                    testGame(board, whiteTurn, players);
                                 } else {
                                     movePiece(board, startRank, startFile, newRank, newFile);
 
@@ -394,6 +400,14 @@ public class TestGame {
                                     legalMove = true;
                                     whiteTurn = true;
                                     testGame(board, whiteTurn, players);
+                                } else if (possibleMoves.get(i).substring(4).contains("check")) {
+                                    movePiece(board, startRank, startFile, newRank, newFile);
+
+                                    moveHistory.add("Black " + board.boardArray[newRank][newFile].getPieceType() + " "
+                                            + move.toLowerCase() + " check");
+                                    legalMove = true;
+                                    whiteTurn = false;
+                                    testGame(board, whiteTurn, players);
                                 } else {
                                     movePiece(board, startRank, startFile, newRank, newFile);
 
@@ -421,9 +435,9 @@ public class TestGame {
      * @return A list of all possible moves for the piece.
      */
     public List<String> listPossibleMoves(TestBoard board, String piece) {
-        int startRank, startFile, destRank, newRank, newFile;
+        int startRank, startFile, destRank;
         char destFile;
-        Collection<String> allPossibleMoves = new ArrayList<String>();
+        List<String> allPossibleMoves = new ArrayList<String>();
 
         if (piece.length() != 2 && !move.matches("[a-hA-H][1-8]")) {
             System.err.println("Error: Invalid piece");
@@ -446,10 +460,12 @@ public class TestGame {
                         destRank = 8 - Integer.parseInt(move.substring(2, 3));
                         destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
 
-                        newRank = Integer.parseInt(move.substring(2, 3));
-                        newFile = Integer.parseInt(move.substring(3, 4));
-                        board.boardArray[newRank][newFile] = new Pawn(Player.BLACK);
-                        System.out.println(destFile + "" + destRank + move.substring(4));
+                        // visualise possible moves with black pawns
+                        // newRank = Integer.parseInt(move.substring(2, 3));
+                        // newFile = Integer.parseInt(move.substring(3, 4));
+                        // board.boardArray[newRank][newFile] = new
+                        // Pawn(Player.BLACK);
+                        System.out.println(String.valueOf(destFile) + String.valueOf(destRank) + move.substring(4));
                     }
                 }
 
@@ -457,7 +473,7 @@ public class TestGame {
                 board.printBoard(board.boardArray);
             }
         }
-        return (List<String>) allPossibleMoves;
+        return allPossibleMoves;
     } // listPossibleMoves
 
     /**

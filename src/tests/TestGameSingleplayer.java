@@ -8,10 +8,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 import game.Player;
-import pieces.Pawn;
 import pieces.PieceType;
 
 public class TestGameSingleplayer {
+    private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
+    private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
+
     private TestBoard board;
     private TestBoard resetBoard;
     private boolean legalMove = false;
@@ -21,9 +23,6 @@ public class TestGameSingleplayer {
 
     private String move;
     private Scanner input = new Scanner(System.in);
-
-    private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
-    private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
 
     private List<String> moveHistory = new ArrayList<String>();
 
@@ -305,7 +304,7 @@ public class TestGameSingleplayer {
      * @return
      */
     public List<String> listPossibleMoves(TestBoard tBoard, String piece) {
-        int startRank, startFile, destRank, newRank, newFile;
+        int startRank, startFile, destRank;
         char destFile;
         List<String> allPossibleMoves = new ArrayList<String>();
 
@@ -315,10 +314,10 @@ public class TestGameSingleplayer {
             startFile = charMap.get(piece.toLowerCase().charAt(0));
             startRank = 8 - Integer.parseInt(piece.substring(1, 2));
 
-            if (board.boardArray[startRank][startFile] == null) {
+            if (tBoard.boardArray[startRank][startFile] == null) {
                 System.err.println("Error: No piece found at " + piece.substring(0, 2));
             } else {
-                allPossibleMoves = board.boardArray[startRank][startFile].generatePossibleMoves(board.boardArray,
+                allPossibleMoves = tBoard.boardArray[startRank][startFile].generatePossibleMoves(tBoard.boardArray,
                         startRank, startFile);
 
                 System.out.println(piece + " selected\nPossible moves:");
@@ -330,18 +329,20 @@ public class TestGameSingleplayer {
                         destRank = 8 - Integer.parseInt(move.substring(2, 3));
                         destFile = reverseCharMap.get(Integer.parseInt(move.substring(3, 4)));
 
-                        newRank = Integer.parseInt(move.substring(2, 3));
-                        newFile = Integer.parseInt(move.substring(3, 4));
-                        board.boardArray[newRank][newFile] = new Pawn(Player.BLACK);
-                        System.out.println(destFile + "" + destRank + move.substring(4));
+                        // visualise possible moves with black pawns
+                        // newRank = Integer.parseInt(move.substring(2, 3));
+                        // newFile = Integer.parseInt(move.substring(3, 4));
+                        // tBoard.boardArray[newRank][newFile] = new
+                        // Pawn(Player.BLACK);
+                        System.out.println(String.valueOf(destFile) + String.valueOf(destRank) + move.substring(4));
                     }
                 }
 
                 System.out.println();
-                board.printBoard(board.boardArray);
+                tBoard.printBoard(tBoard.boardArray);
             }
         }
-        return (List<String>) allPossibleMoves;
+        return allPossibleMoves;
     } // listPossibleMoves
 
     /**
@@ -353,8 +354,73 @@ public class TestGameSingleplayer {
      * @param piece2File
      */
     public void castle(TestBoard tBoard, int piece1Rank, int piece1File, int piece2Rank, int piece2File) {
+        int kingRank = 0;
+        int kingFile = 0;
+        int rookRank = 0;
+        int rookFile = 0;
 
-    }
+        // piece1 = king
+        // piece2 = rook
+        if (tBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.KING
+                && tBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.ROOK) {
+            if (tBoard.boardArray[piece1Rank][piece1File].getMoved() == false
+                    && tBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
+
+                kingRank = piece1Rank;
+                kingFile = piece1File;
+
+                rookRank = piece2Rank;
+                rookFile = piece2File;
+            }
+            // piece 1 = rook
+            // piece 2 = king
+        } else if (tBoard.boardArray[piece1Rank][piece1File].getPieceType() == PieceType.ROOK
+                && tBoard.boardArray[piece2Rank][piece2File].getPieceType() == PieceType.KING) {
+            if (tBoard.boardArray[piece1Rank][piece1File].getMoved() == false
+                    && tBoard.boardArray[piece2Rank][piece2File].getMoved() == false) {
+
+                kingRank = piece2Rank;
+                kingFile = piece2File;
+
+                rookRank = piece1Rank;
+                rookFile = piece1File;
+            }
+        }
+
+        if (kingFile > rookFile) { // left
+            tBoard.boardArray[kingRank][kingFile - 2] = tBoard.boardArray[kingRank][kingFile]; // king
+            tBoard.boardArray[rookRank][kingFile - 1] = tBoard.boardArray[rookRank][rookFile]; // rook
+
+            tBoard.boardArray[kingRank][kingFile] = null;
+            tBoard.boardArray[rookRank][rookFile] = null;
+
+            tBoard.boardArray[kingRank][kingFile - 2].setMoved();
+            if (tBoard.boardArray[kingRank][kingFile - 2].getPlayer() == Player.BLACK) {
+                blackKingR = kingRank;
+                blackKingF = kingFile - 2;
+            } else {
+                whiteKingR = kingRank;
+                whiteKingF = kingFile - 2;
+            }
+            tBoard.boardArray[rookRank][kingFile - 1].setMoved();
+        } else { // right
+            tBoard.boardArray[kingRank][kingFile + 2] = tBoard.boardArray[kingRank][kingFile]; // king
+            tBoard.boardArray[rookRank][kingFile + 1] = tBoard.boardArray[rookRank][rookFile]; // rook
+
+            tBoard.boardArray[kingRank][kingFile] = null;
+            tBoard.boardArray[rookRank][rookFile] = null;
+
+            tBoard.boardArray[kingRank][kingFile + 2].setMoved();
+            if (tBoard.boardArray[kingRank][kingFile + 2].getPlayer() == Player.BLACK) {
+                blackKingR = kingRank;
+                blackKingF = kingFile + 2;
+            } else {
+                whiteKingR = kingRank;
+                whiteKingF = kingFile + 2;
+            }
+            tBoard.boardArray[rookRank][kingFile + 1].setMoved();
+        }
+    } // castle
 
     /**
      * 
@@ -365,8 +431,26 @@ public class TestGameSingleplayer {
      * @param destFile
      */
     public void enPassant(TestBoard tBoard, int startRank, int startFile, int destRank, int destFile) {
+        int attackerRank = startRank;
+        int attackerFile = startFile;
 
-    }
+        int enemyRank;
+        int enemyFile = destFile;
+
+        if (tBoard.boardArray[attackerRank][attackerFile].getPlayer() == Player.BLACK) {
+            enemyRank = destRank - 1;
+            tBoard.boardArray[enemyRank][enemyFile] = null;
+            tBoard.boardArray[enemyRank + 1][enemyFile] = tBoard.boardArray[attackerRank][attackerFile];
+            tBoard.boardArray[attackerRank][attackerFile] = null;
+            tBoard.boardArray[enemyRank + 1][enemyFile].setMoved();
+        } else {
+            enemyRank = destRank + 1;
+            tBoard.boardArray[enemyRank][enemyFile] = null;
+            tBoard.boardArray[enemyRank - 1][enemyFile] = tBoard.boardArray[attackerRank][attackerFile];
+            tBoard.boardArray[attackerRank][attackerFile] = null;
+            tBoard.boardArray[enemyRank - 1][enemyFile].setMoved();
+        }
+    } // enPassant
 
     /**
      * 
@@ -377,8 +461,12 @@ public class TestGameSingleplayer {
      * @param destFile
      */
     public void movePiece(TestBoard tBoard, int startRank, int startFile, int destRank, int destFile) {
-
-    }
+        tBoard.boardArray[destRank][destFile] = null;
+        tBoard.boardArray[destRank][destFile] = tBoard.boardArray[startRank][startFile];
+        tBoard.boardArray[startRank][startFile] = null;
+        tBoard.boardArray[destRank][destFile].setMoved();
+        tBoard.boardArray[destRank][destFile].setMovedTwo(true);
+    } // movePiece
 
     /**
      * 
@@ -386,8 +474,21 @@ public class TestGameSingleplayer {
      * @param lastMove
      */
     public void lastMove(TestBoard tBoard, String lastMove) {
+        if (lastMove.substring(0, 5).equalsIgnoreCase("White")) {
+            lastPlayer = Player.WHITE;
+        } else {
+            lastPlayer = Player.BLACK;
+        }
 
-    }
+        if (lastMove.substring(11, 15).matches("[a-hA-H][1-8][a-hA-H][1-8]")) {
+            lastPieceOldRank = 8 - Integer.parseInt(lastMove.substring(12, 13));
+            lastPieceOldFile = charMap.get(lastMove.charAt(11));
+            lastPieceNewRank = 8 - Integer.parseInt(lastMove.substring(14, 15));
+            lastPieceNewFile = charMap.get(lastMove.charAt(13));
+        }
+
+        lastPiece = tBoard.boardArray[lastPieceNewRank][lastPieceNewFile].getPieceType();
+    } // lastMove
 
     /**
      * 
@@ -397,7 +498,18 @@ public class TestGameSingleplayer {
      * @param destRank
      * @param destFile
      */
-    public void isLegalMove(TestBoard tBoard, int startRank, int startFile, int destRank, int destFile) {
+    public boolean isLegalMove(TestBoard tBoard, int startRank, int startFile, int destRank, int destFile) {
+        String destination = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(destRank)
+                + String.valueOf(destFile);
+        List<String> possibleMoves = tBoard.boardArray[startRank][startFile].generatePossibleMoves(tBoard.boardArray,
+                startRank, startFile);
 
-    }
+        for (String move : possibleMoves) {
+            if (move.substring(0, 4).equals(destination)) {
+                return true;
+            }
+        }
+
+        return false;
+    } // isLegalMove
 }
