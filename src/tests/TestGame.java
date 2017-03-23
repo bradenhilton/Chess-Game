@@ -24,6 +24,7 @@ public class TestGame {
 
     private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
     private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
+    private Map<PieceType, Integer> pieceScores = new HashMap<PieceType, Integer>();
 
     private List<String> moveHistory = new ArrayList<String>();
 
@@ -67,6 +68,12 @@ public class TestGame {
         reverseCharMap.put(5, 'f');
         reverseCharMap.put(6, 'g');
         reverseCharMap.put(7, 'h');
+
+        pieceScores.put(PieceType.PAWN, 1);
+        pieceScores.put(PieceType.KNIGHT, 3);
+        pieceScores.put(PieceType.BISHOP, 3);
+        pieceScores.put(PieceType.ROOK, 5);
+        pieceScores.put(PieceType.QUEEN, 9);
 
         players = numPlayers;
 

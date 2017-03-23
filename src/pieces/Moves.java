@@ -174,21 +174,129 @@ public class Moves {
     }
 
     public List<String> upLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+        for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
+            for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
+                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+                    if (boardArray[tempRank][tempFile] == null) {
+                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                + String.valueOf(tempRank) + String.valueOf(tempFile));
+                    } else {
+                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+
+                                break;
+                            } else {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
+                                        + boardArray[tempRank][tempFile].getPieceType().toString());
+
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         return possibleMoves;
     }
 
     public List<String> upRight(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+        for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
+            for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
+                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+                    if (boardArray[tempRank][tempFile] == null) {
+                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                + String.valueOf(tempRank) + String.valueOf(tempFile));
+                    } else {
+                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+
+                                break;
+                            } else {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
+                                        + boardArray[tempRank][tempFile].getPieceType().toString());
+
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         return possibleMoves;
     }
 
     public List<String> downLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+        for (int tempRank = startRank + 1; tempRank <= 7; tempRank++) {
+            for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
+                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+                    if (boardArray[tempRank][tempFile] == null) {
+                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                + String.valueOf(tempRank) + String.valueOf(tempFile));
+                    } else {
+                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+
+                                break;
+                            } else {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
+                                        + boardArray[tempRank][tempFile].getPieceType().toString());
+
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         return possibleMoves;
     }
 
     public List<String> downRight(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+        for (int tempRank = startRank + 1; tempRank <= 7; tempRank++) {
+            for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
+                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
+                    if (boardArray[tempRank][tempFile] == null) {
+                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                + String.valueOf(tempRank) + String.valueOf(tempFile));
+                    } else {
+                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
+                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+
+                                break;
+                            } else {
+                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
+                                        + boardArray[tempRank][tempFile].getPieceType().toString());
+
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         return possibleMoves;
     }
