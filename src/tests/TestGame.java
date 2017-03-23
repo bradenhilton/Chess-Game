@@ -15,6 +15,8 @@ import pieces.PieceType;
  * @version 1.0
  */
 public class TestGame {
+    private int[][] scoreBoard = new int[8][8];
+
     private boolean legalMove = false;
     private boolean whiteTurn = true;
     private boolean gameOver = false;
@@ -24,6 +26,7 @@ public class TestGame {
 
     private Map<Character, Integer> charMap = new HashMap<Character, Integer>();
     private Map<Integer, Character> reverseCharMap = new HashMap<Integer, Character>();
+    private Map<PieceType, Integer> pieceScores = new HashMap<PieceType, Integer>();
 
     private List<String> moveHistory = new ArrayList<String>();
 
@@ -67,6 +70,12 @@ public class TestGame {
         reverseCharMap.put(5, 'f');
         reverseCharMap.put(6, 'g');
         reverseCharMap.put(7, 'h');
+
+        pieceScores.put(PieceType.PAWN, 1);
+        pieceScores.put(PieceType.BISHOP, 3);
+        pieceScores.put(PieceType.KNIGHT, 3);
+        pieceScores.put(PieceType.ROOK, 5);
+        pieceScores.put(PieceType.QUEEN, 9);
 
         players = numPlayers;
 
@@ -475,6 +484,54 @@ public class TestGame {
         }
         return allPossibleMoves;
     } // listPossibleMoves
+
+    /**
+     * Populates the scoreboard with piece scores for each player.
+     * 
+     * @param board
+     *            Current game board.
+     * @return Total score of the board (+ for white/- for black).
+     */
+    public int scoreBooard(TestBoard board) {
+        int total = 0;
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board.boardArray[i][j] != null) {
+                    if (board.boardArray[i][j].getPlayer() == Player.BLACK) {
+                        scoreBoard[i][j] = pieceScores.get(board.boardArray[i][j].getPieceType()) * -1;
+                    } else {
+                        scoreBoard[i][j] = pieceScores.get(board.boardArray[i][j].getPieceType());
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                total += scoreBoard[i][j];
+            }
+        }
+
+        return total;
+    } // scoreBoard
+
+    /**
+     * Provides "AI" player with competent moves.
+     * 
+     * @param depth
+     *            Depth of the search tree.
+     * @param player
+     *            Starting player colour.
+     * @param alpha
+     *            Alpha score.
+     * @param beta
+     *            Beta score.
+     * @return Move value.
+     */
+    public int miniMax(int depth, Player player, int alpha, int beta) {
+        return 0;
+    }
 
     /**
      * Castles a King and a Rook.
