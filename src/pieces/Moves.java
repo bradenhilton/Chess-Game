@@ -86,10 +86,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> down(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> down(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempRank = startRank + 1; tempRank <= 7; tempRank++) {
             if (boardArray[tempRank][startFile] == null) {
                 possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
@@ -114,10 +114,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> left(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> left(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
             if (boardArray[startRank][tempFile] == null) {
                 possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank)
@@ -142,10 +142,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> right(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> right(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
             if (boardArray[startRank][tempFile] == null) {
                 possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(startRank)
@@ -170,10 +170,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> upLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> upLeft(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
             for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
                 if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
@@ -202,10 +202,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> upRight(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> upRight(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
             for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
                 if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
@@ -234,10 +234,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> downLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> downLeft(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempRank = startRank + 1; tempRank <= 7; tempRank++) {
             for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
                 if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
@@ -266,10 +266,10 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> downRight(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> downRight(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
         for (int tempRank = startRank + 1; tempRank <= 7; tempRank++) {
             for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
                 if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
@@ -298,25 +298,25 @@ public class Moves {
             }
         }
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> offsets(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> offsets(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> castle(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> castle(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
 
-        return possibleMoves;
+        return moves;
     }
 
-    public List<String> enPassant(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
+    public List<String> enPassant(List<String> moves, Piece[][] boardArray, int startRank, int startFile) {
 
-        return possibleMoves;
+        return moves;
     }
 
-    public boolean isKingInCheck(Player player, List<String> possibleMoves, Piece[][] boardArray, int startRank,
+    public boolean isKingInCheck(Player player, List<String> moves, Piece[][] boardArray, int startRank,
             int startFile) {
         for (int i = 0; i < possibleMoves.size(); i++) {
             if (player != boardArray[startRank][startFile].m_player) {
