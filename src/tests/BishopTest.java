@@ -1,8 +1,10 @@
 package tests;
 
-import java.util.*;
-import game.*;
-import pieces.*;
+import java.util.Scanner;
+
+import game.Player;
+import pieces.Bishop;
+import pieces.Piece;
 
 /**
  * @author Braden Hilton - 14017272
@@ -36,7 +38,7 @@ public class BishopTest {
 
         switch (test) {
         case 1:
-            boardArray[4][3] = new Bishop(Player.WHITE);
+            boardArray[4][3] = new Bishop(Player.WHITE, 4, 3);
             // boardArray[0][4] = new King(Player.BLACK);
             // boardArray[2][3] = new Bishop(Player.BLACK);
             // boardArray[7][4] = new King(Player.WHITE);
@@ -44,22 +46,22 @@ public class BishopTest {
             new TestGame(board, 2);
             break;
         case 2:
-            boardArray[4][3] = new Bishop(Player.WHITE);
+            boardArray[4][3] = new Bishop(Player.WHITE, 4, 3);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 3:
-            boardArray[4][3] = new Bishop(Player.WHITE);
-            boardArray[3][2] = new Bishop(Player.WHITE);
-            boardArray[3][4] = new Bishop(Player.WHITE);
-            boardArray[5][2] = new Bishop(Player.WHITE);
-            boardArray[5][4] = new Bishop(Player.WHITE);
+            boardArray[4][3] = new Bishop(Player.WHITE, 4, 3);
+            boardArray[3][2] = new Bishop(Player.WHITE, 3, 2);
+            boardArray[3][4] = new Bishop(Player.WHITE, 3, 4);
+            boardArray[5][2] = new Bishop(Player.WHITE, 5, 2);
+            boardArray[5][4] = new Bishop(Player.WHITE, 5, 4);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 4:
-            boardArray[6][5] = new Bishop(Player.WHITE);
-            boardArray[5][5] = new Bishop(Player.BLACK);
+            boardArray[6][5] = new Bishop(Player.WHITE, 6, 5);
+            boardArray[5][5] = new Bishop(Player.BLACK, 5, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;

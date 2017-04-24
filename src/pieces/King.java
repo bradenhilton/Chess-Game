@@ -11,14 +11,26 @@ import game.Player;
  */
 public class King extends Piece {
     protected PieceType m_type;
+    protected String home;
 
-    public King(Player player) {
-        super(player);
+    public King(Player player, int rank, int file) {
+        super(player, rank, file);
         m_type = PieceType.KING;
+        home = String.valueOf(rank) + String.valueOf(file);
     }
 
     public PieceType getPieceType() {
         return m_type;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    @Override
+    public String getPieceInfo() {
+        return "Piece type: " + m_type.toString() + "\nPlayer: " + m_player.toString() + "\nHome: " + home.charAt(0)
+                + ", " + home.charAt(1) + "\nHas moved: " + hasMoved + "\nCaptures: " + captures;
     }
 
     @Override
@@ -30,6 +42,8 @@ public class King extends Piece {
     public List<String> generatePossibleMoves(Piece[][] boardArray, int startRank, int startFile) {
         // negative (-) indicates up or left
         // positive (+) indicates down or right
+
+        String move;
 
         List<String> attackerMoves = new ArrayList<String>();
         List<String> possibleMoves = new ArrayList<String>();
@@ -55,16 +69,22 @@ public class King extends Piece {
 
             if ((tempRank >= 0 && tempRank <= 7) && (tempFile >= 0 && tempFile <= 7)) {
                 if (boardArray[tempRank][tempFile] == null) {
-                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
-                            + String.valueOf(tempFile));
+                    move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                            + String.valueOf(tempFile);
+                    move = String.format("%-28s", move);
+                    possibleMoves.add(move);
                 } else if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                     if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                        move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                + String.valueOf(tempFile) + " check";
+                        move = String.format("%-28s", move);
+                        possibleMoves.add(move);
                     } else {
-                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
-                                + boardArray[tempRank][tempFile].getPieceType());
+                        move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                + String.valueOf(tempFile) + " capture "
+                                + boardArray[tempRank][tempFile].getPieceType();
+                        move = String.format("%-28s", move);
+                        possibleMoves.add(move);
                     }
                 }
             }
@@ -114,6 +134,7 @@ public class King extends Piece {
             }
         }
 
+        // generates attacker moves
         for (int i = 0; i < possibleMoves.size(); i++) {
             int sRank = Integer.parseInt(possibleMoves.get(i).substring(2, 3));
             int sFile = Integer.parseInt(possibleMoves.get(i).substring(3, 4));
@@ -345,13 +366,17 @@ public class King extends Piece {
         }
 
         if (!leftRookPath.isEmpty()) {
-            possibleMoves.add(String.valueOf(kingR) + String.valueOf(kingF) + String.valueOf(leftRookR)
-                    + String.valueOf(leftRookF) + " castle");
+            move = String.valueOf(kingR) + String.valueOf(kingF) + String.valueOf(leftRookR) + String.valueOf(leftRookF)
+                    + " castle";
+            move = String.format("%-28s", move);
+            possibleMoves.add(move);
         }
 
         if (!rightRookPath.isEmpty()) {
-            possibleMoves.add(String.valueOf(kingR) + String.valueOf(kingF) + String.valueOf(rightRookR)
-                    + String.valueOf(rightRookF) + " castle");
+            move = String.valueOf(kingR) + String.valueOf(kingF) + String.valueOf(rightRookR)
+                    + String.valueOf(rightRookF) + " castle";
+            move = String.format("%-28s", move);
+            possibleMoves.add(move);
         }
 
         return possibleMoves;

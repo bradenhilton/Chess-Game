@@ -14,5 +14,13 @@ public enum Player {
         public String toString() {
             return "Black";
         }
+    };
+
+    Player toggle() {
+        if (this.equals(WHITE)) {
+            return BLACK;
+        } else {
+            return WHITE;
+        }
     }
 }

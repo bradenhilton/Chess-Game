@@ -3,8 +3,8 @@ package tests;
 import java.util.Scanner;
 
 import game.Player;
-import pieces.Pawn;
 import pieces.King;
+import pieces.Pawn;
 import pieces.Piece;
 
 /**
@@ -31,8 +31,9 @@ public class PawnTest {
         System.out.println("7) Capture Right");
         System.out.println("8) En passant");
         System.out.println("9) Promotion");
-        System.out.println("10) Check test");
-        System.out.println("11) AI En passant");
+        System.out.println("10) Promote capture");
+        System.out.println("11) Check test");
+        System.out.println("12) AI En passant");
         // System.out.println("");
 
         String input;
@@ -47,71 +48,78 @@ public class PawnTest {
 
         switch (test) {
         case 1:
-            boardArray[6][3] = new Pawn(Player.WHITE);
-            boardArray[1][5] = new Pawn(Player.BLACK);
+            boardArray[6][3] = new Pawn(Player.WHITE, 6, 3);
+            boardArray[1][5] = new Pawn(Player.BLACK, 1, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 2:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[1][5] = new Pawn(Player.BLACK);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[1][5] = new Pawn(Player.BLACK, 1, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 3:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[1][5] = new Pawn(Player.BLACK);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[1][5] = new Pawn(Player.BLACK, 1, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 4:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[5][5] = new Pawn(Player.WHITE);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[5][5] = new Pawn(Player.WHITE, 5, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 5:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[5][5] = new Pawn(Player.BLACK);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[5][5] = new Pawn(Player.BLACK, 5, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 6:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[5][4] = new Pawn(Player.BLACK);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[5][4] = new Pawn(Player.BLACK, 5, 4);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 7:
-            boardArray[6][5] = new Pawn(Player.WHITE);
-            boardArray[5][6] = new Pawn(Player.BLACK);
+            boardArray[6][5] = new Pawn(Player.WHITE, 6, 5);
+            boardArray[5][6] = new Pawn(Player.BLACK, 5, 6);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 8:
-            boardArray[4][4] = new Pawn(Player.WHITE);
-            boardArray[1][3] = new Pawn(Player.BLACK);
+            // boardArray[4][4] = new Pawn(Player.WHITE, 4, 4);
+            // boardArray[2][3] = new Pawn(Player.BLACK, 1, 3);
 
-            // boardArray[6][4] = new Pawn(Player.WHITE);
-            // boardArray[4][3] = new Pawn(Player.BLACK);
+            boardArray[6][1] = new Pawn(Player.WHITE, 6, 1);
+            boardArray[6][4] = new Pawn(Player.WHITE, 6, 4);
+            boardArray[4][3] = new Pawn(Player.BLACK, 4, 3);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 9:
-            boardArray[1][3] = new Pawn(Player.WHITE);
-            boardArray[6][5] = new Pawn(Player.BLACK);
+            boardArray[1][3] = new Pawn(Player.WHITE, 1, 3);
+            boardArray[6][5] = new Pawn(Player.BLACK, 6, 5);
             board = new TestBoard(boardArray);
-            new TestGame(board, 2);
+            new TestGame(board, 1);
             break;
         case 10:
-            boardArray[7][5] = new Pawn(Player.WHITE);
-            boardArray[5][4] = new King(Player.BLACK);
+            boardArray[1][3] = new Pawn(Player.WHITE, 1, 3);
+            boardArray[0][2] = new Pawn(Player.BLACK, 0, 2);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 11:
-            boardArray[1][4] = new Pawn(Player.BLACK);
-            boardArray[3][5] = new Pawn(Player.WHITE);
+            boardArray[7][5] = new Pawn(Player.WHITE, 7, 5);
+            boardArray[5][4] = new King(Player.BLACK, 5, 4);
+            board = new TestBoard(boardArray);
+            new TestGame(board, 2);
+            break;
+        case 12:
+            boardArray[1][4] = new Pawn(Player.BLACK, 1, 4);
+            boardArray[3][5] = new Pawn(Player.WHITE, 3, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 1);
             break;

@@ -394,7 +394,7 @@ public class TestGameSingleplayer {
             tBoard.boardArray[kingRank][kingFile] = null;
             tBoard.boardArray[rookRank][rookFile] = null;
 
-            tBoard.boardArray[kingRank][kingFile - 2].setMoved();
+            tBoard.boardArray[kingRank][kingFile - 2].setMoved(true);
             if (tBoard.boardArray[kingRank][kingFile - 2].getPlayer() == Player.BLACK) {
                 blackKingR = kingRank;
                 blackKingF = kingFile - 2;
@@ -402,7 +402,7 @@ public class TestGameSingleplayer {
                 whiteKingR = kingRank;
                 whiteKingF = kingFile - 2;
             }
-            tBoard.boardArray[rookRank][kingFile - 1].setMoved();
+            tBoard.boardArray[rookRank][kingFile - 1].setMoved(true);
         } else { // right
             tBoard.boardArray[kingRank][kingFile + 2] = tBoard.boardArray[kingRank][kingFile]; // king
             tBoard.boardArray[rookRank][kingFile + 1] = tBoard.boardArray[rookRank][rookFile]; // rook
@@ -410,7 +410,7 @@ public class TestGameSingleplayer {
             tBoard.boardArray[kingRank][kingFile] = null;
             tBoard.boardArray[rookRank][rookFile] = null;
 
-            tBoard.boardArray[kingRank][kingFile + 2].setMoved();
+            tBoard.boardArray[kingRank][kingFile + 2].setMoved(true);
             if (tBoard.boardArray[kingRank][kingFile + 2].getPlayer() == Player.BLACK) {
                 blackKingR = kingRank;
                 blackKingF = kingFile + 2;
@@ -418,7 +418,7 @@ public class TestGameSingleplayer {
                 whiteKingR = kingRank;
                 whiteKingF = kingFile + 2;
             }
-            tBoard.boardArray[rookRank][kingFile + 1].setMoved();
+            tBoard.boardArray[rookRank][kingFile + 1].setMoved(true);
         }
     } // castle
 
@@ -442,13 +442,13 @@ public class TestGameSingleplayer {
             tBoard.boardArray[enemyRank][enemyFile] = null;
             tBoard.boardArray[enemyRank + 1][enemyFile] = tBoard.boardArray[attackerRank][attackerFile];
             tBoard.boardArray[attackerRank][attackerFile] = null;
-            tBoard.boardArray[enemyRank + 1][enemyFile].setMoved();
+            tBoard.boardArray[enemyRank + 1][enemyFile].setMoved(true);
         } else {
             enemyRank = destRank + 1;
             tBoard.boardArray[enemyRank][enemyFile] = null;
             tBoard.boardArray[enemyRank - 1][enemyFile] = tBoard.boardArray[attackerRank][attackerFile];
             tBoard.boardArray[attackerRank][attackerFile] = null;
-            tBoard.boardArray[enemyRank - 1][enemyFile].setMoved();
+            tBoard.boardArray[enemyRank - 1][enemyFile].setMoved(true);
         }
     } // enPassant
 
@@ -464,7 +464,7 @@ public class TestGameSingleplayer {
         tBoard.boardArray[destRank][destFile] = null;
         tBoard.boardArray[destRank][destFile] = tBoard.boardArray[startRank][startFile];
         tBoard.boardArray[startRank][startFile] = null;
-        tBoard.boardArray[destRank][destFile].setMoved();
+        tBoard.boardArray[destRank][destFile].setMoved(true);
         tBoard.boardArray[destRank][destFile].setMovedTwo(true);
     } // movePiece
 

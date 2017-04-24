@@ -1,8 +1,12 @@
 package game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
-import game.Board;
 import pieces.Piece;
 
 public class MultiplayerGame {
@@ -198,7 +202,7 @@ public class MultiplayerGame {
         boardArray[destRank][destFile] = null;
         boardArray[destRank][destFile] = boardArray[startRank][startFile];
         boardArray[startRank][startFile] = null;
-        boardArray[destRank][destFile].setMoved();
+        boardArray[destRank][destFile].setMoved(true);
     } // movePiece
 
     /**

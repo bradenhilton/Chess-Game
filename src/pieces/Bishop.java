@@ -11,14 +11,26 @@ import game.Player;
  */
 public class Bishop extends Piece {
     protected PieceType m_type;
+    protected String home;
 
-    public Bishop(Player player) {
-        super(player);
+    public Bishop(Player player, int rank, int file) {
+        super(player, rank, file);
         m_type = PieceType.BISHOP;
+        home = String.valueOf(rank) + String.valueOf(file);
     }
 
     public PieceType getPieceType() {
         return m_type;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    @Override
+    public String getPieceInfo() {
+        return "Piece type: " + m_type.toString() + "\nPlayer: " + m_player.toString() + "\nHome: " + home.charAt(0)
+                + ", " + home.charAt(1) + "\nHas moved: " + hasMoved + "\nCaptures: " + captures;
     }
 
     @Override
@@ -31,6 +43,8 @@ public class Bishop extends Piece {
         // negative (-) indicates up or left
         // positive (+) indicates down or right
 
+        String move;
+
         List<String> possibleMoves = new ArrayList<String>();
 
         upLeft: {
@@ -38,21 +52,25 @@ public class Bishop extends Piece {
                 for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
                     if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
                         if (boardArray[tempRank][tempFile] == null) {
-                            possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                    + String.valueOf(tempRank) + String.valueOf(tempFile));
+                            move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                    + String.valueOf(tempFile);
+                            move = String.format("%-28s", move);
+                            possibleMoves.add(move);
                         } else {
                             if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                                 if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                    // possibleMoves.add(String.valueOf(startRank)
-                                    // + String.valueOf(startFile)
-                                    // + String.valueOf(tempRank) +
-                                    // String.valueOf(tempFile) + " check");
+                                    move = String.valueOf(String.valueOf(startRank) + String.valueOf(startFile)
+                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break upLeft;
                                 } else {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                    move = String.valueOf(String.valueOf(startRank) + String.valueOf(startFile)
                                             + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
                                             + boardArray[tempRank][tempFile].getPieceType().toString());
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break upLeft;
                                 }
@@ -69,19 +87,25 @@ public class Bishop extends Piece {
                 for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
                     if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
                         if (boardArray[tempRank][tempFile] == null) {
-                            possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                    + String.valueOf(tempRank) + String.valueOf(tempFile));
+                            move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                    + String.valueOf(tempFile);
+                            move = String.format("%-28s", move);
+                            possibleMoves.add(move);
                         } else {
                             if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                                 if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
+                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check";
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break upRight;
                                 } else {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
                                             + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
-                                            + boardArray[tempRank][tempFile].getPieceType().toString());
+                                            + boardArray[tempRank][tempFile].getPieceType().toString();
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break upRight;
                                 }
@@ -98,19 +122,25 @@ public class Bishop extends Piece {
                 for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
                     if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
                         if (boardArray[tempRank][tempFile] == null) {
-                            possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                    + String.valueOf(tempRank) + String.valueOf(tempFile));
+                            move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                    + String.valueOf(tempFile);
+                            move = String.format("%-28s", move);
+                            possibleMoves.add(move);
                         } else {
                             if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                                 if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
+                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check";
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break downLeft;
                                 } else {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
                                             + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
-                                            + boardArray[tempRank][tempFile].getPieceType().toString());
+                                            + boardArray[tempRank][tempFile].getPieceType().toString();
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break downLeft;
                                 }
@@ -127,19 +157,25 @@ public class Bishop extends Piece {
                 for (int tempFile = startFile + 1; tempFile <= 7; tempFile++) {
                     if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
                         if (boardArray[tempRank][tempFile] == null) {
-                            possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                    + String.valueOf(tempRank) + String.valueOf(tempFile));
+                            move = String.valueOf(startRank) + String.valueOf(startFile) + String.valueOf(tempRank)
+                                    + String.valueOf(tempFile);
+                            move = String.format("%-28s", move);
+                            possibleMoves.add(move);
                         } else {
                             if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
                                 if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check");
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
+                                            + String.valueOf(tempRank) + String.valueOf(tempFile) + " check";
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break downRight;
                                 } else {
-                                    possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
+                                    move = String.valueOf(startRank) + String.valueOf(startFile)
                                             + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
-                                            + boardArray[tempRank][tempFile].getPieceType().toString());
+                                            + boardArray[tempRank][tempFile].getPieceType().toString();
+                                    move = String.format("%-28s", move);
+                                    possibleMoves.add(move);
 
                                     break downRight;
                                 }
@@ -152,48 +188,6 @@ public class Bishop extends Piece {
             }
         }
 
-        possibleMoves = checkForCheck(possibleMoves);
-
         return possibleMoves;
     } // generatePossibleMoves
-
-    public void upLeft(List<String> possibleMoves, Piece[][] boardArray, int startRank, int startFile) {
-        for (int tempRank = startRank - 1; tempRank >= 0; tempRank--) {
-            for (int tempFile = startFile - 1; tempFile >= 0; tempFile--) {
-                if (Math.abs(tempRank - startRank) == Math.abs(tempFile - startFile)) {
-                    if (boardArray[tempRank][tempFile] == null) {
-                        possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                + String.valueOf(tempRank) + String.valueOf(tempFile));
-                    } else {
-                        if (boardArray[tempRank][tempFile].m_player != boardArray[startRank][startFile].m_player) {
-                            if (boardArray[tempRank][tempFile].getPieceType() == PieceType.KING) {
-                                // possibleMoves.add(String.valueOf(startRank)
-                                // + String.valueOf(startFile)
-                                // + String.valueOf(tempRank) +
-                                // String.valueOf(tempFile) + " check");
-
-                                break;
-                            } else {
-                                possibleMoves.add(String.valueOf(startRank) + String.valueOf(startFile)
-                                        + String.valueOf(tempRank) + String.valueOf(tempFile) + " capture "
-                                        + boardArray[tempRank][tempFile].getPieceType().toString());
-
-                                break;
-                            }
-                        } else {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public List<String> checkForCheck(List<String> possibleMoves) {
-        for (int i = 0; i < possibleMoves.size(); i++) {
-            possibleMoves.set(i, "");
-        }
-
-        return possibleMoves;
-    }
 }

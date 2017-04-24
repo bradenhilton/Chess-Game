@@ -280,7 +280,7 @@ public class TestGameMultiplayer {
 
                         newRank = Integer.parseInt(move.substring(2, 3));
                         newFile = Integer.parseInt(move.substring(3, 4));
-                        board.boardArray[newRank][newFile] = new Pawn(Player.BLACK);
+                        board.boardArray[newRank][newFile] = new Pawn(Player.BLACK, newRank, newFile);
                         System.out.println(destFile + "" + destRank + move.substring(4));
                     }
                 }

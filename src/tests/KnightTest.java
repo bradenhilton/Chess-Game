@@ -33,43 +33,43 @@ public class KnightTest {
 
         switch (test) {
         case 1:
-            boardArray[4][3] = new Knight(Player.WHITE);
-            boardArray[6][3] = new Knight(Player.WHITE);
-            boardArray[5][5] = new Knight(Player.WHITE);
+            boardArray[4][3] = new Knight(Player.WHITE, 4, 3);
+            boardArray[6][3] = new Knight(Player.WHITE, 6, 3);
+            boardArray[5][5] = new Knight(Player.WHITE, 5, 5);
 
-            // boardArray[4][3] = new Knight(Player.BLACK);
-            // boardArray[6][3] = new Knight(Player.BLACK);
-            // boardArray[5][5] = new Knight(Player.BLACK);
+            // boardArray[4][3] = new Knight(Player.BLACK, 4, 3);
+            // boardArray[6][3] = new Knight(Player.BLACK, 6, 3);
+            // boardArray[5][5] = new Knight(Player.BLACK, 5, 5);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 2:
-            boardArray[4][3] = new Knight(Player.WHITE);
-            boardArray[3][4] = new Knight(Player.WHITE);
-            boardArray[3][2] = new Knight(Player.WHITE);
-            boardArray[5][4] = new Knight(Player.WHITE);
-            boardArray[5][2] = new Knight(Player.WHITE);
+            boardArray[4][3] = new Knight(Player.WHITE, 4, 3);
+            boardArray[3][4] = new Knight(Player.WHITE, 4, 3);
+            boardArray[3][2] = new Knight(Player.WHITE, 4, 3);
+            boardArray[5][4] = new Knight(Player.WHITE, 4, 3);
+            boardArray[5][2] = new Knight(Player.WHITE, 4, 3);
 
-            // boardArray[4][3] = new Knight(Player.BLACK);
-            // boardArray[3][4] = new Knight(Player.BLACK);
-            // boardArray[3][2] = new Knight(Player.BLACK);
-            // boardArray[5][4] = new Knight(Player.BLACK);
-            // boardArray[5][2] = new Knight(Player.BLACK);
+            // boardArray[4][3] = new Knight(Player.BLACK, 4, 3);
+            // boardArray[3][4] = new Knight(Player.BLACK, 3, 4);
+            // boardArray[3][2] = new Knight(Player.BLACK, 3, 2);
+            // boardArray[5][4] = new Knight(Player.BLACK, 5, 4);
+            // boardArray[5][2] = new Knight(Player.BLACK, 5, 2);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
         case 3:
-            boardArray[4][3] = new Knight(Player.WHITE);
-            boardArray[4][4] = new Knight(Player.WHITE);
-            boardArray[4][2] = new Knight(Player.WHITE);
-            boardArray[3][3] = new Knight(Player.WHITE);
-            boardArray[5][3] = new Knight(Player.WHITE);
+            boardArray[4][3] = new Knight(Player.WHITE, 4, 3);
+            boardArray[4][4] = new Knight(Player.WHITE, 4, 4);
+            boardArray[4][2] = new Knight(Player.WHITE, 4, 2);
+            boardArray[3][3] = new Knight(Player.WHITE, 3, 3);
+            boardArray[5][3] = new Knight(Player.WHITE, 5, 3);
 
-            // boardArray[4][3] = new Knight(Player.BLACK);
-            // boardArray[4][4] = new Knight(Player.BLACK);
-            // boardArray[4][2] = new Knight(Player.BLACK);
-            // boardArray[3][3] = new Knight(Player.BLACK);
-            // boardArray[5][3] = new Knight(Player.BLACK);
+            // boardArray[4][3] = new Knight(Player.BLACK, 4, 3);
+            // boardArray[4][4] = new Knight(Player.BLACK, 4, 4);
+            // boardArray[4][2] = new Knight(Player.BLACK, 4, 2);
+            // boardArray[3][3] = new Knight(Player.BLACK, 3, 3);
+            // boardArray[5][3] = new Knight(Player.BLACK, 5, 3);
             board = new TestBoard(boardArray);
             new TestGame(board, 2);
             break;
