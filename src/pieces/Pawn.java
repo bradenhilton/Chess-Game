@@ -119,6 +119,8 @@ public class Pawn extends Piece {
             }
         }
 
+        possibleMoves = Moves.set(m_type, boardArray, startRank, startFile);
+
         return possibleMoves;
     }
 }

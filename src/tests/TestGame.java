@@ -134,7 +134,7 @@ public class TestGame {
                 }
             }
 
-            //inCheck = isCheck(tBoard, allPossibleMoves);
+            // inCheck = isCheck(tBoard, allPossibleMoves);
 
             if (players == 2) { // multiplayer loop
                 if (whiteTurn) {
@@ -343,7 +343,8 @@ public class TestGame {
     /**
      * Parses move input.
      * <p>
-     * Converts move e.g. d2d4 into start ranks and files and new ranks and files.
+     * Converts move e.g. d2d4 into start ranks and files and new ranks and
+     * files.
      * 
      * @param tBoard
      *            Custom game board.
@@ -522,15 +523,25 @@ public class TestGame {
                 && tBoard.boardArray[blackKingR][blackKingF].getPlayer() != Player.BLACK)
                 && (tBoard.boardArray[whiteKingR][whiteKingF] != null
                         && tBoard.boardArray[whiteKingR][whiteKingF].getPieceType() != PieceType.KING
-                        && tBoard.boardArray[whiteKingR][whiteKingF].getPlayer() != Player.WHITE)) { // if no kings
+                        && tBoard.boardArray[whiteKingR][whiteKingF].getPlayer() != Player.WHITE)) { // if
+                                                                                                     // no
+                                                                                                     // kings
             return false;
         } else if (tBoard.boardArray[blackKingR][blackKingF] != null
                 && tBoard.boardArray[blackKingR][blackKingF].getPieceType() != PieceType.KING
-                && tBoard.boardArray[blackKingR][blackKingF].getPlayer() != Player.BLACK) { // else if no black king
+                && tBoard.boardArray[blackKingR][blackKingF].getPlayer() != Player.BLACK) { // else
+                                                                                            // if
+                                                                                            // no
+                                                                                            // black
+                                                                                            // king
             return false;
         } else if (tBoard.boardArray[whiteKingR][whiteKingF] != null
                 && tBoard.boardArray[whiteKingR][whiteKingF].getPieceType() != PieceType.KING
-                && tBoard.boardArray[whiteKingR][whiteKingF].getPlayer() != Player.WHITE) { // else if no white king
+                && tBoard.boardArray[whiteKingR][whiteKingF].getPlayer() != Player.WHITE) { // else
+                                                                                            // if
+                                                                                            // no
+                                                                                            // white
+                                                                                            // king
             return false;
         } else { // else both kings
             String blackKing = String.valueOf(blackKingR) + String.valueOf(blackKingF);
@@ -629,10 +640,10 @@ public class TestGame {
     public String alphaBeta(TestBoard tBoard, int depth, int beta, int alpha, String move, boolean maximisingPlayer) {
         Player currentPlayer;
         List<String> allMoves = new ArrayList<String>();
-        //String movesString;
+        // String movesString;
         int startRank, startFile, destRank, destFile;
         int value;
-        //int moves = 0;
+        // int moves = 0;
 
         if (lastPlayer != null) {
             if (lastPlayer == Player.WHITE) {
@@ -678,21 +689,21 @@ public class TestGame {
             }
         }
 
-        //        while (moves == 0) {
-        //            // input to test algorithm
-        //            System.out.print("How many moves are there? ");
-        //            movesString = input.nextLine();
+        // while (moves == 0) {
+        // // input to test algorithm
+        // System.out.print("How many moves are there? ");
+        // movesString = input.nextLine();
         //
-        //            if (movesString.matches("[0-9]+")) {
-        //                moves = Integer.parseInt(movesString);
-        //            } else {
-        //                System.err.println("Error: Please insert a number");
-        //            }
-        //        }
+        // if (movesString.matches("[0-9]+")) {
+        // moves = Integer.parseInt(movesString);
+        // } else {
+        // System.err.println("Error: Please insert a number");
+        // }
+        // }
         //
-        //        while (allMoves.size() > moves) {
-        //            allMoves.remove(allMoves.size() - 1);
-        //        }
+        // while (allMoves.size() > moves) {
+        // allMoves.remove(allMoves.size() - 1);
+        // }
 
         maximisingPlayer = !maximisingPlayer;
         for (String m : allMoves) {
@@ -1107,7 +1118,8 @@ public class TestGame {
         history.remove(history.size() - 1);
 
         // restore captured piece and remove the piece from the history
-        if (capturedPiece != null && promotedPiece != null) { // if capture and promotion
+        if (capturedPiece != null && promotedPiece != null) { // if capture and
+                                                              // promotion
             tBoard.boardArray[startRank][startFile] = promotedPiece;
             promoted.remove(promoted.size() - 1);
             tBoard.boardArray[startRank][startFile].decCaptures();
@@ -1218,7 +1230,8 @@ public class TestGame {
     /**
      * Checks move is legal.
      * <p>
-     * Tries to match the chosen move with all possible moves for the selected piece.
+     * Tries to match the chosen move with all possible moves for the selected
+     * piece.
      * 
      * @param tBoard
      *            Custom game board.

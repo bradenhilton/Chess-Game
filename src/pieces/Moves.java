@@ -6,24 +6,38 @@ import java.util.List;
 import game.Player;
 
 public class Moves {
-    List<String> possibleMoves = new ArrayList<String>();
-    Piece[][] boardArray = new Piece[8][8];
-    private int startRank, startFile;
-    private int[][] offsets = null;
-    private PieceType piece;
+    static List<String> possibleMoves = new ArrayList<String>();
+    static Piece[][] boardArray = new Piece[8][8];
+    private static int startRank, startFile;
+    private static int[][] offsets = null;
+    private static PieceType piece;
+    static Player friendly, enemy;
 
-    public List<String> set(PieceType pieceT, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> set(PieceType pieceT, Piece[][] bArray, int sRank, int sFile) {
         piece = pieceT;
         boardArray = bArray;
         startRank = sRank;
         startFile = sFile;
 
+        friendly = boardArray[startRank][startFile].getPlayer();
+        if (friendly == Player.WHITE) {
+            enemy = Player.BLACK;
+        } else {
+            enemy = Player.WHITE;
+        }
+
         switch (piece) {
         case PAWN:
+            // if (!checkForFriendlyCheck && !checkForEnemyCheck) {
             offsets(offsets, possibleMoves, boardArray, startRank, startFile);
             enPassant(offsets, possibleMoves, boardArray, startRank, startFile);
-            isKingInCheck(Player.WHITE, possibleMoves, boardArray, startRank, startFile);
-            isKingInCheck(Player.BLACK, possibleMoves, boardArray, startRank, startFile);
+            // } else if (checkForFriendlyCheck) {
+            // isKingInCheck(friendly, possibleMoves, boardArray, startRank,
+            // startFile);
+            // } else {
+            // isKingInCheck(enemy, possibleMoves, boardArray, startRank,
+            // startFile);
+            // }
             break;
         case ROOK:
             up(possibleMoves, boardArray, startRank, startFile);
@@ -74,7 +88,7 @@ public class Moves {
         return possibleMoves;
     }
 
-    public List<String> up(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> up(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank - 1; tempRank >= 0; tempRank--) {
             if (bArray[tempRank][sFile] == null) {
                 moves.add(String.valueOf(sRank) + String.valueOf(sFile) + String.valueOf(tempRank)
@@ -102,7 +116,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> down(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> down(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank + 1; tempRank <= 7; tempRank++) {
             if (bArray[tempRank][sFile] == null) {
                 moves.add(String.valueOf(sRank) + String.valueOf(sFile) + String.valueOf(tempRank)
@@ -130,7 +144,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> left(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> left(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempFile = sFile - 1; tempFile >= 0; tempFile--) {
             if (bArray[sRank][tempFile] == null) {
                 moves.add(String.valueOf(sRank) + String.valueOf(sFile) + String.valueOf(sRank)
@@ -158,7 +172,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> right(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> right(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempFile = sFile + 1; tempFile <= 7; tempFile++) {
             if (bArray[sRank][tempFile] == null) {
                 moves.add(String.valueOf(sRank) + String.valueOf(sFile) + String.valueOf(sRank)
@@ -186,7 +200,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> upLeft(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> upLeft(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank - 1; tempRank >= 0; tempRank--) {
             for (int tempFile = sFile - 1; tempFile >= 0; tempFile--) {
                 if (Math.abs(tempRank - sRank) == Math.abs(tempFile - sFile)) {
@@ -218,7 +232,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> upRight(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> upRight(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank - 1; tempRank >= 0; tempRank--) {
             for (int tempFile = sFile + 1; tempFile <= 7; tempFile++) {
                 if (Math.abs(tempRank - sRank) == Math.abs(tempFile - sFile)) {
@@ -250,7 +264,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> downLeft(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> downLeft(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank + 1; tempRank <= 7; tempRank++) {
             for (int tempFile = sFile - 1; tempFile >= 0; tempFile--) {
                 if (Math.abs(tempRank - sRank) == Math.abs(tempFile - sFile)) {
@@ -282,7 +296,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> downRight(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> downRight(List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         for (int tempRank = sRank + 1; tempRank <= 7; tempRank++) {
             for (int tempFile = sFile + 1; tempFile <= 7; tempFile++) {
                 if (Math.abs(tempRank - sRank) == Math.abs(tempFile - sFile)) {
@@ -314,8 +328,8 @@ public class Moves {
         return moves;
     }
 
-    public List<String> offsets(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank, int sFile) {
-
+    public static List<String> offsets(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank,
+            int sFile) {
         if (bArray[sRank][sFile].getPieceType() == PieceType.PAWN) {
             if (bArray[sRank][sFile].m_player == Player.BLACK) {
                 if (!bArray[sRank][sFile].hasMoved) {
@@ -366,7 +380,7 @@ public class Moves {
         return moves;
     }
 
-    public List<String> castle(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> castle(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank, int sFile) {
         int leftRookF, rightRookF;
         List<String> leftRookPath = new ArrayList<String>();
         List<String> rightRookPath = new ArrayList<String>();
@@ -420,7 +434,8 @@ public class Moves {
         return moves;
     }
 
-    public List<String> enPassant(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank, int sFile) {
+    public static List<String> enPassant(int[][] moveOffsets, List<String> moves, Piece[][] bArray, int sRank,
+            int sFile) {
         for (int[] o : moveOffsets) {
             int tempRank = sRank + o[0];
             int tempFile = sFile + o[1];
@@ -450,12 +465,27 @@ public class Moves {
         return moves;
     }
 
-    public boolean isKingInCheck(Player player, List<String> moves, Piece[][] bArray, int sRank, int sFile) {
-        for (int i = 0; i < possibleMoves.size(); i++) {
-            if (player != bArray[sRank][sFile].m_player) {
+    public static boolean isKingInCheck(Player player, List<String> moves, Piece[][] bArray, int startRank,
+            int startFile) {
+        Piece tempPiece = null;
+        for (String m : moves) {
+            int destRank = Integer.parseInt(m.substring(2, 3));
+            int destFile = Integer.parseInt(m.substring(3, 4));
 
-            } else {
+            if (bArray[destRank][destFile] != null) {
+                tempPiece = bArray[destRank][destFile];
+                bArray[destRank][destFile] = null;
 
+            }
+
+            bArray[destRank][destFile] = bArray[startRank][startFile];
+            bArray[startRank][startFile] = null;
+
+            bArray[startRank][startFile] = bArray[destRank][destFile];
+            bArray[destRank][destFile] = null;
+
+            if (tempPiece != null) {
+                bArray[destRank][destFile] = tempPiece;
             }
         }
 
