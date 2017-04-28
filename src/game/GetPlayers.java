@@ -38,9 +38,10 @@ public class GetPlayers {
                 System.exit(0);
             }
 
-            if (!(players == 1 || players == 2)) {
-                System.err.println("Error: Please enter 1 or 2");
-                System.exit(0);
+            if (players <= 0) {
+                System.out.println("Starting zeroplayer game...");
+                Game game = new Game();
+                game.start(0);
             }
 
             if (players == 1) {
@@ -49,7 +50,7 @@ public class GetPlayers {
                 game.start(1);
             }
 
-            if (players == 2) {
+            if (players >= 2) {
                 System.out.println("Starting multiplayer game...");
                 Game game = new Game();
                 game.start(2);
@@ -65,7 +66,7 @@ public class GetPlayers {
         String input;
 
         while (!acceptInput) {
-            System.out.println("How many players? (1 or 2)");
+            System.out.println("How many players? (0, 1 or 2)");
             input = getPlayers.nextLine();
 
             if (input.toString().toLowerCase().equals("q") || input.toString().toLowerCase().equals("quit")
@@ -81,9 +82,10 @@ public class GetPlayers {
                     continue;
                 }
 
-                if (!(players == 1 || players == 2)) {
-                    System.err.println("Error: Please enter 1 or 2");
-                    System.exit(0);
+                if (players <= 0) {
+                    System.out.println("Starting zeroplayer game...");
+                    Game game = new Game();
+                    game.start(0);
                 }
 
                 if (players == 1) {
@@ -92,7 +94,7 @@ public class GetPlayers {
                     game.start(1);
                 }
 
-                if (players == 2) {
+                if (players >= 2) {
                     System.out.println("Starting multiplayer game...");
                     Game game = new Game();
                     game.start(2);

@@ -1,6 +1,7 @@
 package game;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Braden Hilton - 14017272
@@ -15,8 +16,7 @@ public class Game {
     /**
      * Starts the game.
      * <p>
-     * Adds characters to the character map, then starts the appropriate game
-     * loop depending on number of players.
+     * Adds characters to the character map, then starts the appropriate game loop depending on number of players.
      * 
      * @param numPlayers
      *            Number of players.
@@ -39,6 +39,10 @@ public class Game {
         reverseCharMap.put(5, 'f');
         reverseCharMap.put(6, 'g');
         reverseCharMap.put(7, 'h');
+
+        if (numPlayers == 0) {
+            new ZeroplayerGame(chessBoard, charMap, reverseCharMap, whiteTurn);
+        }
 
         if (numPlayers == 1) {
             new SingleplayerGame(chessBoard, charMap, reverseCharMap, whiteTurn);
